@@ -71,6 +71,7 @@
      rgb(27, 27, 27, .9)), url(../images/bgbg.jpg);
 }
 
+
 .cmdm{
     position:absolute;
     width: 40%;
@@ -151,4 +152,9 @@
     width: 50px;
     height: 50px;
     padding-left: 30px;
+}
+
+.footer-socials a img:hover{
+    opacity: .2;
+    transition: 400ms linear;
 }

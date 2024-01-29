@@ -36,7 +36,7 @@ const DomainPage = () => {
           </div>
         </div>
 
-        <span className="connect"><a href="#">C o n n e c t</a></span>
+        <span className="connect"><a href="">C o n n e c t</a></span>
 
         <div className="footer-socials">
           <a href=""><img src={insta} alt="" className="insta" /></a>
