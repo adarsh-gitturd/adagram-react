@@ -1,12 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import DomainPage from './pages/DomainPage';
 import reportWebVitals from './reportWebVitals';
+
+import DomainPage from './pages/DomainPage';
+import LoginPage from './pages/LoginPage';
+
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <DomainPage />,
+  },
+  {
+    path: "/login",
+    element: <LoginPage />
+  }
+]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <DomainPage />
+     <RouterProvider router={router} />
   </React.StrictMode>
 );
 

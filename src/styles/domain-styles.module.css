@@ -32,7 +32,7 @@
     font-weight: bold;
 }
 
-.home-about-contact{
+.home_about_contact{
     position: absolute;
     margin-left: 40%;
     width: 60%;
@@ -42,7 +42,7 @@
     justify-content: center;
 }
 
-.home-about-contact a{
+.home_about_contact a{
     text-decoration: none;
     color: white;
     font-size: 1.3rem;
@@ -52,7 +52,7 @@
     text-align: center;
 }
 
-.home-about-contact a:hover{
+.home_about_contact a:hover{
     color:black;
     background-color: white;
     transition: 800ms linear;
@@ -64,7 +64,7 @@
     margin-top: 12px;
 }
 
-.central-area{
+.central_area{
     position:absolute;
     width: 100%;
     height: 50%;
@@ -89,7 +89,7 @@
     margin-left: 300px;
 }
 
-.wel-desc{
+.wel_desc{
     position: absolute;
     margin-left: 50%;
     width: 50%;
@@ -138,7 +138,7 @@
     transition: 800ms linear;
 }
 
-.footer-socials{
+.footer_socials{
     position: absolute;
     width:100%;
     margin-top:630px;
@@ -149,13 +149,13 @@
     margin-top: 20px;
 }
 
-.footer-socials a img{
+.footer_socials a img{
     width: 50px;
     height: 50px;
     padding-left: 30px;
 }
 
-.footer-socials a img:hover{
+.footer_socials a img:hover{
     opacity: .2;
     transition: 400ms linear;
 }
