@@ -1,6 +1,6 @@
 *{
-    font-family: 'Jura', sans-serif;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Kanit', sans-serif;
+    font-family: 'Prompt', sans-serif;
 }
 
 .domain_container{
@@ -103,6 +103,7 @@
     font-size: 3rem;
     margin-left: 10px;
     margin-top: 100px;
+    font-weight: 500;
 }
 
 .desc{
@@ -117,9 +118,9 @@
 
 .connect{
     position: absolute;
-    margin-top: 540px;
-    margin-left: 46%;
-    font-size: 2rem;
+    margin-top: 530px;
+    margin-left: 45%;
+    font-size: 2.3rem;
 }
 
 .connect a{
@@ -127,7 +128,8 @@
     color: white;
     font-weight: bolder;
     border: 3px solid white;
-    padding: 15px;
+    padding: 13px 30px;
+    font-weight: bold;
     border-radius: 2.5rem;
 }
 
@@ -145,7 +147,7 @@
 }
 
 .insta{
-    margin-left: 821px;
+    margin-left: 790px;
     margin-top: 20px;
 }
 
