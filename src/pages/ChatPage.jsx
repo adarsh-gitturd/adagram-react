@@ -1,6 +1,11 @@
 import React from 'react'
 import ChatPageStyles from '../styles/chat-page-styles.module.css'
 
+import contacts from '../images/chat-page/contacts.png'
+import help from '../images/chat-page/help.png'
+import messages from '../images/chat-page/messages.png'
+import notifs from '../images/chat-page/notifs.png'
+import settings from '../images/chat-page/settings.png'
 import logo from '../images/logo.png'
 
 const ChatPage = () => {
@@ -27,25 +32,25 @@ function SideBar(){
     return(
     <div className={ChatPageStyles.side_bar}>
         <img src={logo} alt="" className="logo" />
-        <div className={ChatPageStyles.messages_toggle}>
-            <button className={ChatPageStyles.side_button}></button>
+        <div className={`${ChatPageStyles.toggle} ${ChatPageStyles.toggle_messages}`}>
+            <img src={messages} alt="" />
             <span className={ChatPageStyles.side_text}>Messages</span>
         </div>
-        <div className={ChatPageStyles.notifs_toggle}>
-            <button className={ChatPageStyles.side_button}></button>
+        <div className={ChatPageStyles.toggle}>
+            <img src={notifs} alt="" />
             <span className={ChatPageStyles.side_text}>Notifs</span>
         </div>
-        <div className={ChatPageStyles.contacts_toggle}>
-            <button className={ChatPageStyles.side_button}></button>
+        <div className={ChatPageStyles.toggle}>
+            <img src={contacts} alt="" />
             <span className={ChatPageStyles.side_text}>Contacts</span>
         </div>
         
-        <div className={ChatPageStyles.settings_toggle}>
-            <button className={ChatPageStyles.side_button}></button>
+        <div className={`${ChatPageStyles.toggle} ${ChatPageStyles.toggle_settings}`}>
+            <img src={settings} alt="" />
             <span className={ChatPageStyles.side_text}>Settings</span>
         </div>
-        <div className={ChatPageStyles.help_toggle}>
-            <button className={ChatPageStyles.side_button}></button>
+        <div className={ChatPageStyles.toggle}>
+            <img src={help} alt="" />
             <span className={ChatPageStyles.side_text}>Help</span>
         </div>
     </div>
