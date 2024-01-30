@@ -25,7 +25,7 @@ const LoginPage = () => {
                 <input type="text" placeholder='Username' className={LoginStyles.login_username} />
                 <input type="text" placeholder='Password' className={LoginStyles.login_pass} />
                 <button className={LoginStyles.login_button}>Log In</button>
-                <a href="#" className={LoginStyles.newmeansreg}>New here? Register</a>
+                <a href="./chat" className={LoginStyles.newmeansreg}>New here? Register</a>
             </div>
             
             <img src={bgbg} alt="" className={LoginStyles.login_bg} />
