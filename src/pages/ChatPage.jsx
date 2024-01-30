@@ -12,8 +12,8 @@ const ChatPage = () => {
   return (
     <div className={ChatPageStyles.chat_container}>
         <SideBar />
+        <ContactsBar />
 
-        <div className={ChatPageStyles.contacts_bar}></div>
         <div className={ChatPageStyles.chat_bar}></div>
     </div>
   )
@@ -54,6 +54,21 @@ function SideBar(){
             <span className={ChatPageStyles.side_text}>Help</span>
         </div>
     </div>
+    )
+}
+
+function ContactsBar(){
+    return(
+        <div className={ChatPageStyles.contacts_bar}>
+            <span className={ChatPageStyles.cb_title}>Messages</span>
+            <input type="text" placeholder='Search for new Chat'/>
+            <div className={ChatPageStyles.direct_or_group}>
+                <div className={ChatPageStyles.direct}>Direct</div>
+                <div className={ChatPageStyles.groups}>Groups</div>
+            </div>
+            <div className={ChatPageStyles.directs}></div>
+            <div className={ChatPageStyles.contacts}></div>
+        </div>
     )
 }
 
