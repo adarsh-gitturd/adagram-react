@@ -7,7 +7,6 @@ import insta from '../images/insta.png'
 import pinterest from '../images/pinterest.png'
 import twitter from '../images/twitter.png'
 
-
 const DomainPage = () => {
   return (
     <div className={DomainStyles.domain_container}>
