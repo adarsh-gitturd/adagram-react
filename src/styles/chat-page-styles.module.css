@@ -1,6 +1,7 @@
 *{
     font-family: 'Kanit', sans-serif;
     font-family: 'Prompt', sans-serif;
+    margin:0px;
 }
 
 .chat_container{
@@ -16,6 +17,8 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+    border-right: 2px black solid;
+    z-index: 5;
 }
 
 .logo{
@@ -72,5 +75,38 @@
     background-color:  rgb(157, 157, 157);
     height: 100%;
     width: 30%;
-    margin-left: 5%;
+    margin-left: calc(5% + 2px);
+    display: flex;
+    flex-direction: column;
+}
+
+.divdiv{
+    position: absolute;
+    width: 100%;
+    height: 9%;
+    background-color: rgb(97, 97, 97);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.cb_title{
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.contacts_bar div img{
+    width: 50px;
+    height: 50px;
+}
+
+.contacts_bar div img:hover{
+    opacity: .5;
+}
+
+.search{
+    margin-top: 100px;
+}
+
+.search_set{
+    
 }

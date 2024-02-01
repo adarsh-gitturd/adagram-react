@@ -1,10 +1,12 @@
 import React from 'react'
 import ChatPageStyles from '../styles/chat-page-styles.module.css'
 
+import add_user from '../images/chat-page/add-user.png'
 import contacts from '../images/chat-page/contacts.png'
 import help from '../images/chat-page/help.png'
 import messages from '../images/chat-page/messages.png'
 import notifs from '../images/chat-page/notifs.png'
+import search from '../images/chat-page/search.png'
 import settings from '../images/chat-page/settings.png'
 import logo from '../images/logo.png'
 
@@ -60,8 +62,14 @@ function SideBar(){
 function ContactsBar(){
     return(
         <div className={ChatPageStyles.contacts_bar}>
-            <span className={ChatPageStyles.cb_title}>Messages</span>
-            <input type="text" placeholder='Search for new Chat'/>
+            <div className={ChatPageStyles.divdiv}>
+                <span className={ChatPageStyles.cb_title}>Messages</span>
+                <img src={add_user} alt="" className="addContact" />
+            </div>
+            <div className={ChatPageStyles.search_set}>
+                <input type="text" placeholder='Search for new Chat'className={ChatPageStyles.search}/>
+                <img src={search} alt="" className="searchimg"/>
+            </div>
             <div className={ChatPageStyles.direct_or_group}>
                 <div className={ChatPageStyles.direct}>Direct</div>
                 <div className={ChatPageStyles.groups}>Groups</div>

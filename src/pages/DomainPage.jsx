@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import user from '../images/user.png'
 import DomainStyles from "../styles/domain-styles.module.css"
 
@@ -36,7 +37,7 @@ const DomainPage = () => {
           </div>
         </div>
 
-        <span className={DomainStyles.connect}><a href="/login">Connect</a></span>
+        <span className={DomainStyles.connect}><Link to="/login">Connect</Link></span>
 
         <div className={DomainStyles.footer_socials}>
           <a href=""><img src={insta} alt="" className={DomainStyles.insta} /></a>
