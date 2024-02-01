@@ -62,20 +62,40 @@ function SideBar(){
 function ContactsBar(){
     return(
         <div className={ChatPageStyles.contacts_bar}>
+
             <div className={ChatPageStyles.divdiv}>
                 <span className={ChatPageStyles.cb_title}>Messages</span>
-                <img src={add_user} alt="" className="addContact" />
+                <img src={add_user} alt="" className={ChatPageStyles.addContact} />
             </div>
+
             <div className={ChatPageStyles.search_set}>
-                <input type="text" placeholder='Search for new Chat'className={ChatPageStyles.search}/>
-                <img src={search} alt="" className="searchimg"/>
+                <input type="text" placeholder='Search for new Chat'className={ChatPageStyles.searchh}/>
+                <img src={search} alt="" className={ChatPageStyles.searchimg}/>
             </div>
+
             <div className={ChatPageStyles.direct_or_group}>
                 <div className={ChatPageStyles.direct}>Direct</div>
-                <div className={ChatPageStyles.groups}>Groups</div>
+                <div className={ChatPageStyles.group}>Groups</div>
             </div>
-            <div className={ChatPageStyles.directs}></div>
-            <div className={ChatPageStyles.contacts}></div>
+
+            <DirectChatsList />
+            <GroupChatsList />
+        </div>
+    )
+}
+
+function DirectChatsList(){
+    return(
+        <div  className={ChatPageStyles.directs}>
+            hello
+        </div>
+    )
+}
+
+function GroupChatsList(){
+    return(
+        <div className={ChatPageStyles.groups}>
+            
         </div>
     )
 }
