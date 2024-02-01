@@ -2,6 +2,7 @@ import React from 'react'
 import ChatPageStyles from '../styles/chat-page-styles.module.css'
 
 import add_user from '../images/chat-page/add-user.png'
+import add_group from '../images/chat-page/add-group.png'
 import contacts from '../images/chat-page/contacts.png'
 import help from '../images/chat-page/help.png'
 import messages from '../images/chat-page/messages.png'
@@ -66,6 +67,7 @@ function ContactsBar(){
             <div className={ChatPageStyles.divdiv}>
                 <span className={ChatPageStyles.cb_title}>Messages</span>
                 <img src={add_user} alt="" className={ChatPageStyles.addContact} />
+                <img src={add_group} alt="" className={ChatPageStyles.addContact} />
             </div>
 
             <div className={ChatPageStyles.search_set}>
@@ -95,7 +97,15 @@ function DirectChatsList(){
 function GroupChatsList(){
     return(
         <div className={ChatPageStyles.groups}>
-            
+
+        </div>
+    )
+}
+
+function AddNewContact(){
+    return(
+        <div>
+
         </div>
     )
 }

@@ -86,17 +86,19 @@
     background-color: rgb(97, 97, 97);
     display: flex;
     align-items: center;
-    justify-content: space-around;
 }
 
 .cb_title{
     font-size: 2.5rem;
     font-weight: bold;
+    margin-left: 50px;
+    margin-right: 180px;
 }
 
 .addContact{
     width: 50px;
     height: 50px;
+    margin-right: 20px;
 }
 
 .addContact:hover{
