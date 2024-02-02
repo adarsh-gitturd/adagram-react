@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../images/logo.png';
 import user from '../images/user.png';
 
@@ -46,7 +46,7 @@ const RegisterPage = () => {
     <div className={RegisterStyles.register_container}>
         <div className={RegisterStyles.header}>
             <div className={RegisterStyles.title}><a href="/">adagram</a></div>
-            <a href=""><img src={user} alt="" className={RegisterStyles.user} /></a>
+            <Link to="/"><img src={user} alt="" className={RegisterStyles.user} /></Link>
         </div>
     
         <div className={RegisterStyles.reg_area_header}>

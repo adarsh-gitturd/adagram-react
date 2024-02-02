@@ -1,7 +1,9 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import bgbg from '../images/bgbg.jpg'
-import user from '../images/user.png'
 import logo from '../images/logo.png'
+import user from '../images/user.png'
 
 import LoginStyles from '../styles/login-styles.module.css'
 
@@ -11,21 +13,55 @@ import pinterest from '../images/pinterest.png'
 import twitter from '../images/twitter.png'
 
 const LoginPage = () => {
+
+  const navv = useNavigate();
+
+  const [form, setForm] = useState(
+    {
+        username:'',
+        password:'',
+    });
+
+  function updateCredentialChecker(e){
+      const eventName = e.target.name;
+      const eventValue = e.target.value;
+
+      setForm(prev=>({
+          ...prev,
+          [eventName] : eventValue,
+      }));
+  }
+
+  const checkValidCredentials = async (e) => {
+    e.preventDefault();
+    let realUsere = await axios.get("http://localhost:8081/users");
+    let realUsers = realUsere.data;
+    const huh = realUsers.some(entry =>
+        Object.entries(form).every(([key, value]) =>
+          entry.hasOwnProperty(key) && entry[key] == value
+        )
+      );
+    console.log(form);
+    if(huh){
+      navv('/chat');
+    }
+  };
+
   return (
     <div className={LoginStyles.login_container}>
         <div className={LoginStyles.header}>
             <div className={LoginStyles.title}><a href="/">adagram</a></div>
-            <a href=""><img src={user} alt="" className={LoginStyles.user} /></a>
+            <Link to="/"><img src={user} alt="" className={LoginStyles.user} /></Link>
         </div>
         
         <div className={LoginStyles.login_area}>
             <div className={LoginStyles.login}>
                 <img src={logo} alt="" className={LoginStyles.login_logo} />
                 <span className={LoginStyles.login_title}>Log In</span>
-                <input type="text" placeholder='Username' className={LoginStyles.login_username} />
-                <input type="text" placeholder='Password' className={LoginStyles.login_pass} />
-                <button className={LoginStyles.login_button}>Log In</button>
-                <a href="./chat" className={LoginStyles.newmeansreg}>New here? Register</a>
+                <input onChange={e=>updateCredentialChecker(e)} name="username" type="text" placeholder='Username' className={LoginStyles.login_username} />
+                <input onChange={e=>updateCredentialChecker(e)} name="password" type="text" placeholder='Password' className={LoginStyles.login_pass} />
+                <button onClick={checkValidCredentials} className={LoginStyles.login_button}>Log In</button>
+                <Link to="/register" className={LoginStyles.newmeansreg}>New here? Register</Link>
             </div>
             
             <img src={bgbg} alt="" className={LoginStyles.login_bg} />

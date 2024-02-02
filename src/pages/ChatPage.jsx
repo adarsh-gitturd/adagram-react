@@ -9,9 +9,9 @@ import help from '../images/chat-page/help.png';
 import messages from '../images/chat-page/messages.png';
 import notifs from '../images/chat-page/notifs.png';
 import search from '../images/chat-page/search.png';
+import send from '../images/chat-page/send.png';
 import settings from '../images/chat-page/settings.png';
 import logo from '../images/logo.png';
-import send from '../images/chat-page/send.png';
 
 const ChatPage = () => {
   return (
