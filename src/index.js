@@ -2,9 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 
+import ChatPage from './pages/ChatPage';
 import DomainPage from './pages/DomainPage';
 import LoginPage from './pages/LoginPage';
-import ChatPage from './pages/ChatPage'
+import RegisterPage from './pages/RegisterPage'
 
 import {
   createBrowserRouter,
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <LoginPage />
+  },
+  {
+    path: "/register",
+    element: <RegisterPage />
   },
   {
     path: "/chat",

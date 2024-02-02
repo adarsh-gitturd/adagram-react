@@ -82,26 +82,37 @@
 
 .divdiv{
     width: 100%;
-    height: 9%;
+    height: 7.5%;
     background-color: rgb(97, 97, 97);
     display: flex;
     align-items: center;
 }
 
 .cb_title{
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: bold;
     margin-left: 50px;
-    margin-right: 180px;
+    margin-right: 220px;
 }
 
 .addContact{
-    width: 50px;
-    height: 50px;
+    width: 35px;
+    height: 35px;
     margin-right: 20px;
 }
 
 .addContact:hover{
+    opacity: .5;
+    cursor: pointer;
+}
+
+.addGroup{
+    width: 35px;
+    height: 35px;
+    margin-right: 20px;
+}
+
+.addGroup:hover{
     opacity: .5;
 }
 
@@ -113,17 +124,21 @@
 
 .searchh{
     width: 80%;
+    height: 100%;
     background-color: rgb(56, 56, 56);
     text-decoration: none;
     border: none;
     outline: none;
     box-shadow: none;
+    padding-left: 15px;
+    font-size: 1.01rem;
 }
 
 .searchimg{
     background-color: rgb(56, 56, 56);
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
+    padding: 5px;
 }
 
 .direct_or_group{
@@ -164,4 +179,45 @@
 
 .directs{
     height: 80%;
+}
+
+.addnewcontact{
+    position: absolute;
+    z-index: 4;
+    margin-top: 300px;
+    margin-left: 700px;
+    background-color: rgb(157, 157, 157);
+    width: 400px;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 3rem;
+}
+
+.addnewcontact span{
+    margin-top: -24px;
+    color: black;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.addnewcontact form input{
+    margin-left: 14px;
+    margin-bottom: 10px;
+}
+
+.addnewcontact form div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 10px;
+}
+
+.addnewcontact form div button{
+    width: 100px;
+    height: 30px;
 }
