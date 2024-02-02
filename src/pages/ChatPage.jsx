@@ -11,6 +11,7 @@ import notifs from '../images/chat-page/notifs.png';
 import search from '../images/chat-page/search.png';
 import settings from '../images/chat-page/settings.png';
 import logo from '../images/logo.png';
+import send from '../images/chat-page/send.png';
 
 const ChatPage = () => {
   return (
@@ -18,7 +19,6 @@ const ChatPage = () => {
         <SideBar />
         <ContactsBar />
 
-        <div className={ChatPageStyles.chat_bar}></div>
     </div>
   )
 }
@@ -71,7 +71,8 @@ function ContactsBar(){
             username:'',
         });
     const [newUserAdded, setNewUserAdded] = useState(false);
-    
+    const [activeChat, setActiveChat] = useState(false);
+
     function handleAddNewContact(){
         setShowAddContact(true);
     }
@@ -103,6 +104,12 @@ function ContactsBar(){
             cancelAddContact();
         }
       };
+    
+    function openChat(e){
+        // console.log(e.nativeEvent.target.innerHTML);
+        let chat = e.nativeEvent.target.innerHTML;
+        setActiveChat(chat);
+    }
 
     return(
         <div className={ChatPageStyles.contacts_bar}>
@@ -146,26 +153,37 @@ function ContactsBar(){
                     {/* {console.log({_contacts})} */}
                     {_contacts.map((item, index) => (
                         <React.Fragment key={index}>
-                        <span className={ChatPageStyles.individualContact}>{item}</span>
-
-                        <br />
+                        <div name={item} className={ChatPageStyles.individualContact} onClick={e=>openChat(e)}>{item}</div>
                         </React.Fragment>
                     ))}
                 </div>
             )}
-            <GroupChatsList />
+
+            {activeChat && <ChatArea chatName={activeChat} />}
+
+            {/* <GroupChatsList /> */}
         </div>
     )
 }
 
-function GroupChatsList(){
+function ChatArea(props){
     return(
-        <div className={ChatPageStyles.groups}>
-            
+        <div className={ChatPageStyles.actualChatArea}>
+            <div className={ChatPageStyles.contactName}>
+                <div>{props.chatName}</div>
+                <img src={search} alt="" />
+            </div>
+
+            <div className={ChatPageStyles.actualactualChatArea}>
+
+            </div>
+
+            <div className={ChatPageStyles.sendAndMediaArea}>
+                <input type="text" className={ChatPageStyles.messageToSend}/>
+                <img src={send} alt=""/>
+            </div>
         </div>
-    )
+    );
 }
-
-
 
 export default ChatPage

@@ -222,3 +222,91 @@
     height: 30px;
 }
 
+.individualContact{
+    width: calc(100% - 20px);
+    height: 60px;
+    background-color: rgb(185, 185, 185);
+    border-bottom: 1px black solid;
+    margin: 0px;
+    font-size: 1.2rem;
+    padding-top: 25px;
+    padding-left: 20px;
+}
+
+.individualContact:hover{
+    background-color: rgb(116, 116, 116);
+    cursor: pointer;
+}
+
+.actualChatArea{
+    position: absolute;
+    background-color: rgb(24, 24, 24);
+    margin-left: 576px;
+    height: 100%;
+    width: 1245px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.contactName{
+    box-sizing: border-box;
+    color: white;
+    width: 100%;
+    height: 8%;
+    font-weight: bold;
+    font-size: 1.4rem;
+    background-color:rgb(114, 114, 114);
+    padding-left: 5%;
+    padding-top: 18px;
+    /* margin-top: -24.5%; */
+    display: flex;
+}
+
+.actualChatArea img{
+    position: absolute  ;
+    box-sizing: border-box;
+    width: 40px;
+    height: 40px;
+    margin-left: 85%;
+}
+
+.actualactualChatArea{
+    width: 100%;
+    height: 82%;
+    background-color: rgb(0, 0, 0);
+}
+
+.sendAndMediaArea{
+    background-color: rgb(70, 70, 70);
+    width: 100%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-content: center;
+}
+
+.messageToSend{
+    box-sizing: border-box;
+    width: 80%;
+    height: 70%;
+    border: none;
+    outline: none;
+    background: none;
+    box-shadow: none;
+    background-color: rgb(177, 177, 177);
+    font-size: 1.2rem;
+    padding-left: 20px;
+}
+
+.sendAndMediaArea img{
+    width: 40px;
+    height: 40px;
+    margin-left: 90%;
+}
+
+.sendAndMediaArea img:hover{
+    opacity: .5;
+    cursor: pointer;
+}
