@@ -1,15 +1,16 @@
-import React from 'react'
-import ChatPageStyles from '../styles/chat-page-styles.module.css'
+import axios from 'axios';
+import React, { useState } from 'react';
+import ChatPageStyles from '../styles/chat-page-styles.module.css';
 
-import add_user from '../images/chat-page/add-user.png'
-import add_group from '../images/chat-page/add-group.png'
-import contacts from '../images/chat-page/contacts.png'
-import help from '../images/chat-page/help.png'
-import messages from '../images/chat-page/messages.png'
-import notifs from '../images/chat-page/notifs.png'
-import search from '../images/chat-page/search.png'
-import settings from '../images/chat-page/settings.png'
-import logo from '../images/logo.png'
+import add_group from '../images/chat-page/add-group.png';
+import add_user from '../images/chat-page/add-user.png';
+import contacts from '../images/chat-page/contacts.png';
+import help from '../images/chat-page/help.png';
+import messages from '../images/chat-page/messages.png';
+import notifs from '../images/chat-page/notifs.png';
+import search from '../images/chat-page/search.png';
+import settings from '../images/chat-page/settings.png';
+import logo from '../images/logo.png';
 
 const ChatPage = () => {
   return (
@@ -61,13 +62,53 @@ function SideBar(){
 }
 
 function ContactsBar(){
+    const [showAddContact, setShowAddContact] = useState(false);
+
+    const [form, setForm] = useState(
+        {
+            phone:'',
+            username:'',
+        });
+
+    function handleAddNewContact(){
+        setShowAddContact(true);
+    }
+
+    function cancelAddContact(){
+        setShowAddContact(false);
+    }
+
+    function handleAddContactChange(e){
+        const eventName = e.target.id;
+        const eventValue = e.target.value;
+
+        setForm(prev=>({
+            ...prev,
+            [eventName] : eventValue,
+        }));
+    };
+
+    const checkValidContactToAdd = async (e) => {
+        e.preventDefault();
+        console.log(form);
+        let realUsere = await axios.get("http://localhost:8081/users");
+        let realUsers = realUsere.data;
+        const huh = realUsers.some(entry =>
+            Object.entries(form).every(([key, value]) =>
+              entry.hasOwnProperty(key) && entry[key] == value
+            )
+          );
+        if(huh){
+            
+        }
+      };
+
     return(
         <div className={ChatPageStyles.contacts_bar}>
-
             <div className={ChatPageStyles.divdiv}>
                 <span className={ChatPageStyles.cb_title}>Messages</span>
-                <img src={add_user} alt="" className={ChatPageStyles.addContact} />
-                <img src={add_group} alt="" className={ChatPageStyles.addContact} />
+                <img src={add_user} alt="" className={ChatPageStyles.addContact} onClick={handleAddNewContact}/>
+                <img src={add_group} alt="" className={ChatPageStyles.addGroup} />
             </div>
 
             <div className={ChatPageStyles.search_set}>
@@ -80,6 +121,25 @@ function ContactsBar(){
                 <div className={ChatPageStyles.group}>Groups</div>
             </div>
 
+            {/* code to add a new contact */}
+            {showAddContact && (
+                <div className={ChatPageStyles.addnewcontact}>
+                    <span>Add a new Contact</span>
+                    <form  onSubmit={checkValidContactToAdd}>
+                        <label htmlFor="phone">Phone No.</label>
+                        <input id="phone" type="text" onChange={e=>handleAddContactChange(e)}/>
+                        <br />
+                        <label htmlFor="username">Username </label>
+                        <input id="username" type="text" onChange={e=>handleAddContactChange(e)}/>
+                        <div>
+                            <button type="submit">Add</button>
+                            <button onClick={cancelAddContact}>Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            )}
+            {/*  */}
+
             <DirectChatsList />
             <GroupChatsList />
         </div>
@@ -88,8 +148,8 @@ function ContactsBar(){
 
 function DirectChatsList(){
     return(
-        <div  className={ChatPageStyles.directs}>
-            hello
+        <div className={ChatPageStyles.directs}>
+            
         </div>
     )
 }
@@ -102,12 +162,6 @@ function GroupChatsList(){
     )
 }
 
-function AddNewContact(){
-    return(
-        <div>
 
-        </div>
-    )
-}
 
 export default ChatPage
