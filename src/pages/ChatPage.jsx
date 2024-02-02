@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import reactElementToJSXString from 'react-element-to-jsx-string';
 import ChatPageStyles from '../styles/chat-page-styles.module.css';
 
 import add_group from '../images/chat-page/add-group.png';
@@ -63,21 +64,19 @@ function SideBar(){
 
 function ContactsBar(){
     const [showAddContact, setShowAddContact] = useState(false);
-
     const [form, setForm] = useState(
         {
             phone:'',
             username:'',
         });
-
+    const [newUserAdded, setNewUserAdded] = useState(false);
+    
     function handleAddNewContact(){
         setShowAddContact(true);
     }
-
     function cancelAddContact(){
         setShowAddContact(false);
     }
-
     function handleAddContactChange(e){
         const eventName = e.target.id;
         const eventValue = e.target.value;
@@ -87,10 +86,8 @@ function ContactsBar(){
             [eventName] : eventValue,
         }));
     };
-
     const checkValidContactToAdd = async (e) => {
         e.preventDefault();
-        console.log(form);
         let realUsere = await axios.get("http://localhost:8081/users");
         let realUsers = realUsere.data;
         const huh = realUsers.some(entry =>
@@ -99,7 +96,7 @@ function ContactsBar(){
             )
           );
         if(huh){
-            
+            setNewUserAdded(true);
         }
       };
 
@@ -140,16 +137,14 @@ function ContactsBar(){
             )}
             {/*  */}
 
-            <DirectChatsList />
+            {newUserAdded && (
+               <div className={ChatPageStyles.directs}>
+                    {/* console.log({form}) */}
+                    <span>{form.phone}</span>
+                    <span>{form.username}</span>
+                </div> 
+            )}
             <GroupChatsList />
-        </div>
-    )
-}
-
-function DirectChatsList(){
-    return(
-        <div className={ChatPageStyles.directs}>
-            
         </div>
     )
 }
@@ -157,7 +152,7 @@ function DirectChatsList(){
 function GroupChatsList(){
     return(
         <div className={ChatPageStyles.groups}>
-
+            
         </div>
     )
 }
