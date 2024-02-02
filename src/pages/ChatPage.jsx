@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import reactElementToJSXString from 'react-element-to-jsx-string';
 import ChatPageStyles from '../styles/chat-page-styles.module.css';
 
 import add_group from '../images/chat-page/add-group.png';
@@ -62,6 +61,8 @@ function SideBar(){
     )
 }
 
+var _contacts = [];
+
 function ContactsBar(){
     const [showAddContact, setShowAddContact] = useState(false);
     const [form, setForm] = useState(
@@ -97,6 +98,9 @@ function ContactsBar(){
           );
         if(huh){
             setNewUserAdded(true);
+            _contacts.push(form.username);
+            // console.log(_contacts);
+            cancelAddContact();
         }
       };
 
@@ -138,11 +142,16 @@ function ContactsBar(){
             {/*  */}
 
             {newUserAdded && (
-               <div className={ChatPageStyles.directs}>
-                    {/* console.log({form}) */}
-                    <span>{form.phone}</span>
-                    <span>{form.username}</span>
-                </div> 
+                <div className={ChatPageStyles.directs}>
+                    {/* {console.log({_contacts})} */}
+                    {_contacts.map((item, index) => (
+                        <React.Fragment key={index}>
+                        <span className={ChatPageStyles.individualContact}>{item}</span>
+
+                        <br />
+                        </React.Fragment>
+                    ))}
+                </div>
             )}
             <GroupChatsList />
         </div>
