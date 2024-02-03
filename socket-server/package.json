@@ -1,18 +1,16 @@
 {
-  "name": "adagram-react",
+  "name": "socket-server",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "axios": "^1.6.7",
+    "install": "^0.13.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-element-to-jsx-string": "^15.0.0",
-    "react-router-dom": "^6.21.3",
     "react-scripts": "5.0.1",
-    "socket.io-client": "^4.7.4",
+    "socket-io": "^1.0.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

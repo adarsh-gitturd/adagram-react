@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { io } from 'socket.io-client'
 import ChatPageStyles from '../styles/chat-page-styles.module.css';
 
 import add_group from '../images/chat-page/add-group.png';
@@ -12,6 +13,11 @@ import search from '../images/chat-page/search.png';
 import send from '../images/chat-page/send.png';
 import settings from '../images/chat-page/settings.png';
 import logo from '../images/logo.png';
+
+{/* {localStorage.getItem('loggedInUser')} */}
+
+// da client
+const socket = io("http://localhost:8081")
 
 const ChatPage = () => {
   return (

@@ -41,8 +41,8 @@ const LoginPage = () => {
           entry.hasOwnProperty(key) && entry[key] == value
         )
       );
-    console.log(form);
     if(huh){
+      localStorage.setItem('loggedInUser', `${form.username}`);
       navv('/chat');
     }
   };
