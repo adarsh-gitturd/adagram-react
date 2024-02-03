@@ -17,7 +17,7 @@ import logo from '../images/logo.png';
 {/* {localStorage.getItem('loggedInUser')} */}
 
 // da client
-const socket = io("http://localhost:8081")
+// const socket = io("http://localhost:8081")
 
 const ChatPage = () => {
   return (
