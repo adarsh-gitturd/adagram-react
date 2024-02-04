@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { io } from 'socket.io-client'
+import SockJsClient from 'react-stomp';
 import ChatPageStyles from '../styles/chat-page-styles.module.css';
 
 import add_group from '../images/chat-page/add-group.png';
@@ -15,9 +15,6 @@ import settings from '../images/chat-page/settings.png';
 import logo from '../images/logo.png';
 
 {/* {localStorage.getItem('loggedInUser')} */}
-
-// da client
-// const socket = io("http://localhost:8081")
 
 const ChatPage = () => {
   return (
@@ -167,6 +164,21 @@ function ContactsBar(){
 
             {activeChat && <ChatArea chatName={activeChat} />}
 
+            <SockJsClient url='http://localhost:8081/abc/'
+                topics={['/topic/message']}
+                onConnect={() => {
+                    console.log("connected");
+                }}
+                onDisconnect={() => {
+                    console.log("Disconnected");
+                }}
+                onMessage={(msg) => {
+                    console.log(msg);
+                }}
+                ref={(client) => {
+                    // this.clientRef = client
+                    console.log('   client ref')
+            }}/>
             {/* <GroupChatsList /> */}
         </div>
     )
