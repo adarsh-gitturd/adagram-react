@@ -34,8 +34,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 // the server can broadcast messages to all connected clients on 
 // destinations prefixed with "/topic". Clients can subscribe to
 //  these topics to receive updates.
-// setApplicationDestinationPrefixes("/app"):
 
+// setApplicationDestinationPrefixes("/app"):
 // This line sets the application destination prefix to "/app". 
 // It means that client destinations must be prefixed with "/app" 
 // when sending messages to the server. For example, if a client

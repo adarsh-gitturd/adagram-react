@@ -3,8 +3,10 @@ package com.wilson.adarsh.adagram.backend.serious_hello;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @Controller
+@CrossOrigin("http://localhost:3000") //connect to react 's port'
 public class SocketController {
 
     @MessageMapping("/chat") // from client
@@ -15,8 +17,9 @@ public class SocketController {
 
     @MessageMapping("/chat-test") // from client
     @SendTo("/topic/test") // to client
-    public String test() {
-        return "HELLO CLIENT FROM DA BOSS";
+    public Message test(Message message) {
+        message.setContent("HELLO CLIENT FROM DA BOSS");
+        return message;
     }
 
 }

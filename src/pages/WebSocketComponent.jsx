@@ -14,12 +14,11 @@ const WebSocketComponent = (props) => {
             setStompClient(stomp);
 
             stomp.subscribe(`/topic/test`, (message) => {
-                console.log('Received message:', message.body);
+                console.log('Received message from da bludonius serva:', message.body);
                 // Handle the received message as needed
             });
     
-
-            stomp.send(`/app/chat-test/`, {}, "boss yo");
+            stomp.send(`/app/chat-test`, {}, JSON.stringify({ content: "boss yo" }));
 
         });
 
