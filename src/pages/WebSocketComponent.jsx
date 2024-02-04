@@ -2,6 +2,12 @@ import React, { useEffect, useState } from 'react';
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
 
+{/* 
+    <WebSocketComponent 
+        loggedInUser={localStorage.getItem('loggedInUser')} 
+        sendMessageToThisChat={activeChat}/> 
+*/}
+
 const WebSocketComponent = (props) => {
     const [stompClient, setStompClient] = useState(null);
 

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import SockJsClient from 'react-stomp';
 import ChatPageStyles from '../styles/chat-page-styles.module.css';
+import WebSocketComponent from './WebSocketComponent';
 
 import add_group from '../images/chat-page/add-group.png';
 import add_user from '../images/chat-page/add-user.png';
@@ -13,7 +13,6 @@ import search from '../images/chat-page/search.png';
 import send from '../images/chat-page/send.png';
 import settings from '../images/chat-page/settings.png';
 import logo from '../images/logo.png';
-import WebSocketComponent from './WebSocketComponent';
 
 {/* {localStorage.getItem('loggedInUser')} */}
 
@@ -166,9 +165,9 @@ function ContactsBar(){
             {activeChat && <ChatArea chatName={activeChat} />}
 
 
-            <WebSocketComponent 
+            {/* <WebSocketComponent 
                 loggedInUser={localStorage.getItem('loggedInUser')} 
-                sendMessageToThisChat={activeChat}/>
+                sendMessageToThisChat={activeChat}/> */}
 
             {/* <GroupChatsList /> */}
         </div>
@@ -176,6 +175,12 @@ function ContactsBar(){
 }
 
 function ChatArea(props){
+    const [showDA, setShowDA] = useState(false);
+
+    const handleImgClick = () => {
+        setShowDA(true);
+    };
+
     return(
         <div className={ChatPageStyles.actualChatArea}>
             <div className={ChatPageStyles.contactName}>
@@ -189,9 +194,19 @@ function ChatArea(props){
 
             <div className={ChatPageStyles.sendAndMediaArea}>
                 <input type="text" className={ChatPageStyles.messageToSend}/>
-                <img src={send} alt=""/>
+                {showDA && <DA activeChat={props.chatName} />}
+                <img src={send} onClick={handleImgClick} alt="" />
             </div>
         </div>
+    );
+}
+
+function DA(props){
+    return(
+        <WebSocketComponent 
+            loggedInUser={localStorage.getItem('loggedInUser')} 
+            sendMessageToThisChat={props.activeChat}/>
+        // console.log("sjnsjdksd")
     );
 }
 
