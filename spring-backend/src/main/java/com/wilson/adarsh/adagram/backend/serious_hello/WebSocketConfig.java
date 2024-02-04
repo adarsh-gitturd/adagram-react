@@ -1,4 +1,5 @@
-package com.wilson.adarsh.adagram.backend;
+package com.wilson.adarsh.adagram.backend.serious_hello;
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
@@ -20,7 +21,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/abc").
-            setAllowedOrigins("*").withSockJS();
+            setAllowedOriginPatterns("*").withSockJS();
         // clients connect to this endpoint to establish a 
         // connection with da server
     }

@@ -12,4 +12,11 @@ public class SocketController {
     public Message chat(Message message) {
         return message;
     }
+
+    @MessageMapping("/chat-test") // from client
+    @SendTo("/topic/test") // to client
+    public String test() {
+        return "HELLO CLIENT FROM DA BOSS";
+    }
+
 }

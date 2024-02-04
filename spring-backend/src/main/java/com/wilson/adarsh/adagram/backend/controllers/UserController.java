@@ -13,7 +13,7 @@ import com.wilson.adarsh.adagram.backend.models.User;
 import com.wilson.adarsh.adagram.backend.repositories.UserRepository;
 
 @RestController
-@CrossOrigin("http://localhost:3002") //connect to react 's port'
+@CrossOrigin("http://localhost:3000") //connect to react 's port'
 public class UserController {
     
     @Autowired

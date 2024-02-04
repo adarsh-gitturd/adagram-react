@@ -13,6 +13,7 @@ import search from '../images/chat-page/search.png';
 import send from '../images/chat-page/send.png';
 import settings from '../images/chat-page/settings.png';
 import logo from '../images/logo.png';
+import WebSocketComponent from './WebSocketComponent';
 
 {/* {localStorage.getItem('loggedInUser')} */}
 
@@ -164,21 +165,11 @@ function ContactsBar(){
 
             {activeChat && <ChatArea chatName={activeChat} />}
 
-            <SockJsClient url='http://localhost:8081/abc/'
-                topics={['/topic/message']}
-                onConnect={() => {
-                    console.log("connected");
-                }}
-                onDisconnect={() => {
-                    console.log("Disconnected");
-                }}
-                onMessage={(msg) => {
-                    console.log(msg);
-                }}
-                ref={(client) => {
-                    // this.clientRef = client
-                    console.log('   client ref')
-            }}/>
+
+            <WebSocketComponent 
+                loggedInUser={localStorage.getItem('loggedInUser')} 
+                sendMessageToThisChat={activeChat}/>
+
             {/* <GroupChatsList /> */}
         </div>
     )
