@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import SockJsClient from 'react-stomp';
 import ChatPageStyles from '../styles/chat-page-styles.module.css';
 
 import add_group from '../images/chat-page/add-group.png';
