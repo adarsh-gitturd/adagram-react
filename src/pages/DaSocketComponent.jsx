@@ -17,7 +17,7 @@ const DaSocketComponent = (props) => {
             const subscriptionPath = `/user/${props.recipient}/topic/private/${props.sender}`;
             stomp.subscribe(subscriptionPath, msg => {
                 console.log(`Received da msg from da server ---> ${msg}`);
-                
+
             });
 
             // stompClient.send('/app/chat', {}, JSON.stringify({ content: 'Hello, Server!' }));
@@ -26,7 +26,7 @@ const DaSocketComponent = (props) => {
                 content: props.mts.mts,
                 recipient: props.recipient,
             };
-
+// E
             console.log(`msg to send ${JSON.stringify(msgToSend)}`);
             stomp.send('/app/chat-send', {}, JSON.stringify(msgToSend));
         });
