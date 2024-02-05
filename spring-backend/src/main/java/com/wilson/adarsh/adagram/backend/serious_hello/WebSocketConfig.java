@@ -1,7 +1,5 @@
 package com.wilson.adarsh.adagram.backend.serious_hello;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
@@ -18,7 +16,8 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         config.enableSimpleBroker("/topic", "/user");
         // Server -> Client
         config.setApplicationDestinationPrefixes("/app");
-        // Client -> Server
+        // // Client -> Server
+        config.setUserDestinationPrefix("/user");
     }
 
     @Override

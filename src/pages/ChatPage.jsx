@@ -13,6 +13,7 @@ import search from '../images/chat-page/search.png';
 import send from '../images/chat-page/send.png';
 import settings from '../images/chat-page/settings.png';
 import logo from '../images/logo.png';
+import UltimateSocket from './UltimateSocket';
 
 {/* {localStorage.getItem('loggedInUser')} */}
 
@@ -163,7 +164,10 @@ function ContactsBar(){
                 </div>
             )}
 
-            {activeChat && <ChatArea chatName={activeChat} />}
+            {activeChat && <
+                UltimateSocket recipient={activeChat}
+                               sender={sessionStorage.getItem('loggedInUser')}
+            />}
 
 
             {/* <WebSocketComponent 
@@ -175,59 +179,5 @@ function ContactsBar(){
     )
 }
 
-function ChatArea(props){
-    const [showDA, setShowDA] = useState(false);
-    const [mts, setMts] = useState({
-        mts: '',
-    });
-    
-
-    const handleImgClick = () => {
-        setShowDA(true);
-    };
-
-    const handleChange = (msg) => {
-        const currentValue = msg.target.value;
-        setMts((prev) => ({
-            ...prev,
-            mts: currentValue,
-        }));
-    };
-
-    return(
-        <div className={ChatPageStyles.actualChatArea}>
-            <div className={ChatPageStyles.contactName}>
-                <div>{props.chatName}</div>
-                <img src={search} alt="" />
-            </div>
-
-            <div className={ChatPageStyles.actualactualChatArea}>
-
-            </div>
-
-            <div className={ChatPageStyles.sendAndMediaArea}>
-                <input onChange={handleChange} type="text" className={ChatPageStyles.messageToSend}/>
-                {
-                    showDA && mts &&
-                    <DaSocketComponent 
-                        sender={sessionStorage.getItem('loggedInUser')} 
-                        recipient={props.chatName}
-                        mts={mts}
-                    /> 
-                }
-                <img src={send} onClick={handleImgClick} alt="" />
-            </div>
-        </div>
-    );
-}
-
-function DA(props){
-    // return(
-    //     <WebSocketComponent 
-    //         loggedInUser={localStorage.getItem('loggedInUser')} 
-    //         sendMessageToThisChat={props.activeChat}/>
-    //     // console.log("sjnsjdksd")
-    // );
-}
 
 export default ChatPage

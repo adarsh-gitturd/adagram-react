@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 public class SocketController {
     private final Logger logger = LoggerFactory.getLogger(SocketController.class);
 
-    @MessageMapping("/chat") // from client
-    @SendTo("/topic/message") // to client
-    public String chat(Message message) {
-        return "AYO";
-    }
+    // @MessageMapping("/chat") // from client
+    // @SendTo("/topic/message") // to client
+    // public String chat(Message message) {
+    //     return "AYO";
+    // }
 
     @MessageMapping("/chat-test") // from client
     @SendTo("/topic/test") // to client
@@ -33,10 +33,24 @@ public class SocketController {
     @Autowired
     private SimpMessagingTemplate messagingTemplate;
 
-    @MessageMapping("/chat-send")
-    public void sendMessage(@Payload Message chatMessage) {
+    // @MessageMapping("/chat-send")
+    // public void sendMessage(@Payload Message chatMessage) {
+    //     // Include both sender and recipient in the destination path
+    //     String destination = "/user/" + chatMessage.getRecipient() + "/topic/private/" + chatMessage.getSender();
+
+    //     // Forward the message to the specified destination
+    //     messagingTemplate.convertAndSend(destination, chatMessage);
+    // }
+
+    @MessageMapping("/chat")
+    public void sendMessageAH(@Payload Message chatMessage) {
         // Include both sender and recipient in the destination path
-        String destination = "/user/" + chatMessage.getRecipient() + "/topic/private/";
+        String destination = "/user/" + chatMessage.getRecipient() + "/queue/messages";
+
+        // logger.error("OIOIOIOIOI");
+        // logger.error("OIOIOIOIOI");
+        // logger.error("OIOIOIOIOI");
+        // logger.error("OIOIOIOIOI");
 
         // Forward the message to the specified destination
         messagingTemplate.convertAndSend(destination, chatMessage);

@@ -9,26 +9,22 @@ const DaSocketComponent = (props) => {
         const socket = new SockJS('http://localhost:8081/abc');
         const stomp = Stomp.over(socket);
 
-        // console.log(`SENDER ${props.sender} +++++ RECIPIENT ${props.recipient}`);
-
         stomp.connect({}, () => {
             setStompClient(stomp);
 
-            const subscriptionPath = `/user/${props.recipient}/topic/private`;
+            const subscriptionPath = `/user/${props.sender}/topic/private/${props.recipient}`;
+            
             stomp.subscribe(subscriptionPath, msg => {
                 console.log(`Received da msg from da server ---> ${msg}`);
-                
             });
 
-            // stompClient.send('/app/chat', {}, JSON.stringify({ content: 'Hello, Server!' }));
-            const msgToSend = {
+            const info = {
                 sender: props.sender,
                 content: props.mts.mts,
                 recipient: props.recipient,
             };
-// E
-            // console.log(`msg to send ${JSON.stringify(msgToSend)}`);
-            stomp.send('/app/chat-send', {}, JSON.stringify(msgToSend));
+
+            stomp.send('/app/chat-send', {}, JSON.stringify(info));
         });
 
         return () => {
@@ -37,7 +33,7 @@ const DaSocketComponent = (props) => {
                 console.log('Disconnected from WebSocket yoo');
             }
         };
-    }, [props.sender, props.recipient, props.mts.mts]);
+    }, []);
 
     return (
         <div>
