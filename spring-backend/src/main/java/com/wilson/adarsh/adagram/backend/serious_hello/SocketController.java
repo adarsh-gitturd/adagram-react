@@ -36,7 +36,7 @@ public class SocketController {
     @MessageMapping("/chat-send")
     public void sendMessage(@Payload Message chatMessage) {
         // Include both sender and recipient in the destination path
-        String destination = "/user/" + chatMessage.getRecipient() + "/topic/private/" + chatMessage.getSender();
+        String destination = "/user/" + chatMessage.getRecipient() + "/topic/private/";
 
         // Forward the message to the specified destination
         messagingTemplate.convertAndSend(destination, chatMessage);

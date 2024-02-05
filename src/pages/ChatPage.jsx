@@ -118,6 +118,7 @@ function ContactsBar(){
         <div className={ChatPageStyles.contacts_bar}>
             <div className={ChatPageStyles.divdiv}>
                 <span className={ChatPageStyles.cb_title}>Messages</span>
+                <h1>{sessionStorage.getItem('loggedInUser')}</h1>
                 <img src={add_user} alt="" className={ChatPageStyles.addContact} onClick={handleAddNewContact}/>
                 <img src={add_group} alt="" className={ChatPageStyles.addGroup} />
             </div>
@@ -209,7 +210,7 @@ function ChatArea(props){
                 {
                     showDA && mts &&
                     <DaSocketComponent 
-                        sender={localStorage.getItem('loggedInUser')} 
+                        sender={sessionStorage.getItem('loggedInUser')} 
                         recipient={props.chatName}
                         mts={mts}
                     /> 
