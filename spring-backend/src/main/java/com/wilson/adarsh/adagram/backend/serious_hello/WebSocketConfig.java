@@ -9,13 +9,15 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 @Configuration
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
+    // private final Logger logger = LoggerFactory.getLogger(SocketController.class);
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
-        config.enableSimpleBroker("/topic");
+        config.enableSimpleBroker("/topic", "/user");
         // Server -> Client
         config.setApplicationDestinationPrefixes("/app");
-        // Client -> Server
+        // // Client -> Server
+        config.setUserDestinationPrefix("/user");
     }
 
     @Override

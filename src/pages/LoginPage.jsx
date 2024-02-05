@@ -42,7 +42,7 @@ const LoginPage = () => {
         )
       );
     if(huh){
-      localStorage.setItem('loggedInUser', `${form.username}`);
+      sessionStorage.setItem('loggedInUser', `${form.username}`);
       navv('/chat');
     }
   };

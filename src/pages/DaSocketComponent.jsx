@@ -2,13 +2,7 @@ import React, { useEffect, useState } from 'react';
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
 
-{/* 
-    <WebSocketComponent 
-        loggedInUser={localStorage.getItem('loggedInUser')} 
-        sendMessageToThisChat={activeChat}/> 
-*/}
-
-const WebSocketComponent = (props) => {
+const DaSocketComponent = (props) => {
     const [stompClient, setStompClient] = useState(null);
 
     useEffect(() => {
@@ -16,16 +10,21 @@ const WebSocketComponent = (props) => {
         const stomp = Stomp.over(socket);
 
         stomp.connect({}, () => {
-            console.log('Connected to WebSocket yoo');
             setStompClient(stomp);
 
-            stomp.subscribe(`/topic/test`, (message) => {
-                console.log('Received message from da bludonius serva:', message.body);
-                // Handle the received message as needed
+            const subscriptionPath = `/user/${props.sender}/topic/private/${props.recipient}`;
+            
+            stomp.subscribe(subscriptionPath, msg => {
+                console.log(`Received da msg from da server ---> ${msg}`);
             });
-    
-            stomp.send(`/app/chat-test`, {}, JSON.stringify({ content: "boss yo" }));
 
+            const info = {
+                sender: props.sender,
+                content: props.mts.mts,
+                recipient: props.recipient,
+            };
+
+            stomp.send('/app/chat-send', {}, JSON.stringify(info));
         });
 
         return () => {
@@ -38,9 +37,9 @@ const WebSocketComponent = (props) => {
 
     return (
         <div>
-            {/* react stuff */}
+            {/* You can include any JSX content related to this component */}
         </div>
     );
 };
 
-export default WebSocketComponent;
+export default DaSocketComponent;
