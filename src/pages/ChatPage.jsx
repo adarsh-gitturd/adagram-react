@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import ChatPageStyles from '../styles/chat-page-styles.module.css';
-import WebSocketComponent from './WebSocketComponent';
+import DaSocketComponent from './DaSocketComponent';
 
 import add_group from '../images/chat-page/add-group.png';
 import add_user from '../images/chat-page/add-user.png';
@@ -176,9 +176,21 @@ function ContactsBar(){
 
 function ChatArea(props){
     const [showDA, setShowDA] = useState(false);
+    const [mts, setMts] = useState({
+        mts: '',
+    });
+    
 
     const handleImgClick = () => {
         setShowDA(true);
+    };
+
+    const handleChange = (msg) => {
+        const currentValue = msg.target.value;
+        setMts((prev) => ({
+            ...prev,
+            mts: currentValue,
+        }));
     };
 
     return(
@@ -193,8 +205,15 @@ function ChatArea(props){
             </div>
 
             <div className={ChatPageStyles.sendAndMediaArea}>
-                <input type="text" className={ChatPageStyles.messageToSend}/>
-                {showDA && <DA activeChat={props.chatName} />}
+                <input onChange={handleChange} type="text" className={ChatPageStyles.messageToSend}/>
+                {
+                    showDA && mts &&
+                    <DaSocketComponent 
+                        sender={localStorage.getItem('loggedInUser')} 
+                        recipient={props.chatName}
+                        mts={mts}
+                    /> 
+                }
                 <img src={send} onClick={handleImgClick} alt="" />
             </div>
         </div>
@@ -202,12 +221,12 @@ function ChatArea(props){
 }
 
 function DA(props){
-    return(
-        <WebSocketComponent 
-            loggedInUser={localStorage.getItem('loggedInUser')} 
-            sendMessageToThisChat={props.activeChat}/>
-        // console.log("sjnsjdksd")
-    );
+    // return(
+    //     <WebSocketComponent 
+    //         loggedInUser={localStorage.getItem('loggedInUser')} 
+    //         sendMessageToThisChat={props.activeChat}/>
+    //     // console.log("sjnsjdksd")
+    // );
 }
 
 export default ChatPage
