@@ -6,6 +6,8 @@ var stompClient = null;
 
 const UltimateSocket = (props) => {
     const [text, setText] = useState('');
+    const [messages, setMessages] = useState([]);
+    // const [messagesReceived, setMessagesRevy] = useState([]);
     
     useEffect(() => {
         const Stomp = require("stompjs");
@@ -13,18 +15,23 @@ const UltimateSocket = (props) => {
         SockJS = new SockJS("http://localhost:8081/abc");
         stompClient = Stomp.over(SockJS);
         stompClient.connect({}, onConnected, onError);
-    }, [])
 
-    const connect = () => {
-        
-      };
+        return () => {
+            if (stompClient && stompClient.connected) {
+                stompClient.disconnect();
+            }
+        };
+    }, [text])
     
     const onConnected = () => {
         console.log("connected");
-        stompClient.subscribe(
-          "/user/" + props.sender + "/queue/messages",
-          onMessageReceived
-        );
+        if(stompClient && stompClient.connected){
+            stompClient.subscribe(
+                "/user/" + props.sender + "/queue/messages",
+                onMessageReceived
+            );
+
+        }
     };
     
     const onError = (err) => {
@@ -33,6 +40,8 @@ const UltimateSocket = (props) => {
 
     const onMessageReceived = (msg) => {
         console.log("Received with love <3:", msg);
+        const DADAcontent = JSON.parse(msg.body).content;
+        setMessages([...messages, DADAcontent]);
     };
 
     const sendMessage = (msg) => {
@@ -52,6 +61,7 @@ const UltimateSocket = (props) => {
             return;
         }
         sendMessage(text);
+        setMessages([...messages, text]);
         setText("");
     };
 
@@ -63,15 +73,20 @@ const UltimateSocket = (props) => {
             </div>
 
             <div className={ChatPageStyles.actualactualChatArea}>
-                <h1>{text} </h1>
+                {messages.map((item, index) => (
+                    <h2 key={index}>{item}</h2>
+                ))}
             </div>
 
             <div className={ChatPageStyles.sendAndMediaArea}>
                 <input
                     type="text"
+                    value={text}
                     className={ChatPageStyles.messageToSend}
                     onKeyDown={handleMessageSending}
-                    onChange={(event) => setText(event.target.value)}
+                    onChange={(event) => {
+                        setText(event.target.value)
+                    }}
                 />
             </div>
         </div>

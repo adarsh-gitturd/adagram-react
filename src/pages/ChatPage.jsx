@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import ChatPageStyles from '../styles/chat-page-styles.module.css';
-import DaSocketComponent from './DaSocketComponent';
 
 import add_group from '../images/chat-page/add-group.png';
 import add_user from '../images/chat-page/add-user.png';
@@ -10,12 +9,10 @@ import help from '../images/chat-page/help.png';
 import messages from '../images/chat-page/messages.png';
 import notifs from '../images/chat-page/notifs.png';
 import search from '../images/chat-page/search.png';
-import send from '../images/chat-page/send.png';
 import settings from '../images/chat-page/settings.png';
 import logo from '../images/logo.png';
 import UltimateSocket from './UltimateSocket';
 
-{/* {localStorage.getItem('loggedInUser')} */}
 
 const ChatPage = () => {
   return (
