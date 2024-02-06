@@ -4,11 +4,19 @@ import ChatPageStyles from '../styles/chat-page-styles.module.css';
 
 var stompClient = null;
 
+/*
+    problems : 
+        1) 1 connects. 2 connects. 1 sends msg, 2 recieves 1 BUT PRINTS 2 unless 2 sends smth
+
+*/
+
 const UltimateSocket = (props) => {
     const [text, setText] = useState('');
-    const [messages, setMessages] = useState([]);
-    // const [messagesReceived, setMessagesRevy] = useState([]);
-    
+    // const [messages, setMessages] = useState([]);
+    const [hh, setHh] = useState(false);
+
+    const [daMessages, setDaMessages] = useState([]);
+
     useEffect(() => {
         const Stomp = require("stompjs");
         var SockJS = require("sockjs-client");
@@ -21,27 +29,35 @@ const UltimateSocket = (props) => {
                 stompClient.disconnect();
             }
         };
-    }, [text])
-    
+    }, [daMessages]);
+
     const onConnected = () => {
         console.log("connected");
-        if(stompClient && stompClient.connected){
+        if (stompClient.connected) {
             stompClient.subscribe(
-                "/user/" + props.sender + "/queue/messages",
+                "/user/" + props.sender + "/queue/messages" + props.recipient,
                 onMessageReceived
             );
-
         }
     };
-    
+
     const onError = (err) => {
         console.log(err);
     };
 
     const onMessageReceived = (msg) => {
         console.log("Received with love <3:", msg);
+        setHh(true);
         const DADAcontent = JSON.parse(msg.body).content;
-        setMessages([...messages, DADAcontent]);
+
+        // setMessages([...messages, DADAcontent]);
+        // messages.push(DADAcontent);
+
+        setDaMessages(prevMessages => ({
+            ...prevMessages,
+            [props.recipient]: [...(prevMessages[props.recipient] || []), DADAcontent]
+        }));
+        
     };
 
     const sendMessage = (msg) => {
@@ -51,19 +67,33 @@ const UltimateSocket = (props) => {
                 content: msg,
                 recipient: props.recipient
             };
+            setHh(false);
             stompClient.send("/app/chat", {}, JSON.stringify(message));
         }
     };
 
     const handleMessageSending = (e) => {
-        // console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
-        if(e.code != 'Enter'){
+        if (e.code !== 'Enter') {
             return;
         }
+        if (daMessages.length == 0) {
+            setHh(true);
+        }
+        // setMessages([...messages, text]);
+
+        setDaMessages(prevMessages => ({
+            ...prevMessages,
+            [props.recipient]: [...(prevMessages[props.recipient] || []),  `YOU : ${text}`]
+        }));
+
         sendMessage(text);
-        setMessages([...messages, text]);
         setText("");
     };
+
+    
+// (456) ['XD', 'XD', '?', 'LOL']
+
+// (adarshdesu) ['yo desu', 'ho buddy']
 
     return (
         <div className={ChatPageStyles.actualChatArea}>
@@ -73,9 +103,20 @@ const UltimateSocket = (props) => {
             </div>
 
             <div className={ChatPageStyles.actualactualChatArea}>
-                {messages.map((item, index) => (
-                    <h2 key={index}>{item}</h2>
+                {console.log(daMessages)}
+                {/* {messages.map((item, index) => (
+                    <h2 key={index}>
+                        {hh ? `${props.sender} --- ${item}` : `${props.recipient} --- ${item}`}
+                    </h2>
+                ))} */}
+
+                {daMessages[props.recipient]?.map((message, index) => (
+                    <h2 key={index}>
+                    {/* {hh ? props.sender : props.recipient} == {message} */}
+                    {message}
+                </h2>
                 ))}
+
             </div>
 
             <div className={ChatPageStyles.sendAndMediaArea}>
@@ -85,7 +126,7 @@ const UltimateSocket = (props) => {
                     className={ChatPageStyles.messageToSend}
                     onKeyDown={handleMessageSending}
                     onChange={(event) => {
-                        setText(event.target.value)
+                        setText(event.target.value);
                     }}
                 />
             </div>
