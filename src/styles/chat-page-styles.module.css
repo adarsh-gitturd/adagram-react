@@ -7,7 +7,7 @@
 .chat_container{
     width:100%;
     height: 100vh;
-    background-color:black;
+    background-color:#311D3F;
     position: relative;
 }
 .side_bar{
@@ -17,7 +17,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    border-right: 2px black solid;
+    border-right: 2px #311D3F solid;
     z-index: 5;
 }
 
@@ -198,7 +198,7 @@
 
 .addnewcontact span{
     margin-top: -24px;
-    color: black;
+    color: #311D3F;
     font-size: 1.2rem;
     font-weight: bold;
     margin-bottom: 20px;
@@ -226,7 +226,7 @@
     width: calc(100% - 20px);
     height: 60px;
     background-color: rgb(185, 185, 185);
-    border-bottom: 1px black solid;
+    border-bottom: 1px #311D3F solid;
     margin: 0px;
     font-size: 1.2rem;
     padding-top: 25px;
@@ -251,13 +251,13 @@
 
 .contactName{
     box-sizing: border-box;
-    color: white;
+    color: #E23E57;
     width: 100%;
     height: 8%;
     font-weight: bold;
     font-size: 1.4rem;
     background-color:rgb(114, 114, 114);
-    padding-left: 5%;
+    padding-left: 6%;
     padding-top: 18px;
     /* margin-top: -24.5%; */
     display: flex;
@@ -274,7 +274,8 @@
 .actualactualChatArea{
     width: 100%;
     height: 82%;
-    background-color: yellow;
+    background-color: #311D3F;
+    color: #E23E57;
 }
 
 .sendAndMediaArea{

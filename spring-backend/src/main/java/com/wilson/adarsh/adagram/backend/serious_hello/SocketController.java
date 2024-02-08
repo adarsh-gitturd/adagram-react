@@ -31,7 +31,7 @@ public class SocketController {
     // ONE TO ONE STUFF YKNOW
 
     @Autowired
-    private SimpMessagingTemplate messagingTemplate;
+    private SimpMessagingTemplate   messagingTemplate;
 
     // @MessageMapping("/chat-send")
     // public void sendMessage(@Payload Message chatMessage) {
@@ -45,7 +45,7 @@ public class SocketController {
     @MessageMapping("/chat")
     public void sendMessageAH(@Payload Message chatMessage) {
         // Include both sender and recipient in the destination path
-        String destination = "/user/" + chatMessage.getRecipient() + "/queue/messages";
+        String destination = "/user/" + chatMessage.getRecipient() + "/queue/messages" + chatMessage.getSender();
 
         // logger.error("OIOIOIOIOI");
         // logger.error("OIOIOIOIOI");

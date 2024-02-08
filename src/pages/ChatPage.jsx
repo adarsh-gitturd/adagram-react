@@ -161,17 +161,14 @@ function ContactsBar(){
                 </div>
             )}
 
-            {activeChat && <
-                UltimateSocket recipient={activeChat}
-                               sender={sessionStorage.getItem('loggedInUser')}
-            />}
+            {activeChat ? (
+                <UltimateSocket
+                    recipient={activeChat}
+                    sender={sessionStorage.getItem('loggedInUser')}
+                />
+            ) : null}
 
 
-            {/* <WebSocketComponent 
-                loggedInUser={localStorage.getItem('loggedInUser')} 
-                sendMessageToThisChat={activeChat}/> */}
-
-            {/* <GroupChatsList /> */}
         </div>
     )
 }
