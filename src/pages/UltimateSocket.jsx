@@ -6,7 +6,7 @@ var stompClient = null;
 
 /*
     problems : 
-        1) 1 connects. 2 connects. 1 sends msg, 2 recieves 1 BUT PRINTS 2 unless 2 sends smth
+        1) no duplicates - ironic spam control?
 
 */
 
@@ -17,11 +17,11 @@ const UltimateSocket = (props) => {
 
     const [daMessages, setDaMessages] = useState([]);
 
+    const Stomp = require("stompjs");
+    var SockJS = require("sockjs-client");
+    SockJS = new SockJS("http://localhost:8081/abc");
+    stompClient = Stomp.over(SockJS);
     useEffect(() => {
-        const Stomp = require("stompjs");
-        var SockJS = require("sockjs-client");
-        SockJS = new SockJS("http://localhost:8081/abc");
-        stompClient = Stomp.over(SockJS);
         stompClient.connect({}, onConnected, onError);
 
         return () => {
@@ -29,7 +29,16 @@ const UltimateSocket = (props) => {
                 stompClient.disconnect();
             }
         };
-    }, [daMessages]);
+    }, [hh, daMessages]);
+
+    // useEffect(()=>{
+    //     if (stompClient.connected) {
+    //         stompClient.subscribe(
+    //             "/user/" + props.sender + "/queue/messages" + props.recipient,
+    //             onMessageReceived
+    //         );
+    //     }
+    // }, [])
 
     const onConnected = () => {
         console.log("connected");
@@ -46,6 +55,7 @@ const UltimateSocket = (props) => {
     };
 
     const onMessageReceived = (msg) => {
+
         console.log("Received with love <3:", msg);
         setHh(true);
         const DADAcontent = JSON.parse(msg.body).content;
@@ -53,11 +63,26 @@ const UltimateSocket = (props) => {
         // setMessages([...messages, DADAcontent]);
         // messages.push(DADAcontent);
 
-        setDaMessages(prevMessages => ({
-            ...prevMessages,
-            [props.recipient]: [...(prevMessages[props.recipient] || []), DADAcontent]
-        }));
-        
+        setDaMessages(prevMessages => {
+        const previousMessages = prevMessages[props.recipient] || [];
+        const shouldAddContent = previousMessages.length === 0 || previousMessages[previousMessages.length - 1] !== DADAcontent;
+
+        if (shouldAddContent) {
+            return {
+                ...prevMessages,
+                [props.recipient]: [...previousMessages, DADAcontent]
+            };
+        } else {
+            return prevMessages;
+        }
+
+        // setDaMessages(prevMessages => ({
+        //     ...prevMessages,
+        //     [props.recipient]: [...(prevMessages[props.recipient] || []), DADAcontent]
+        // }));
+
+});
+
     };
 
     const sendMessage = (msg) => {
@@ -98,12 +123,12 @@ const UltimateSocket = (props) => {
     return (
         <div className={ChatPageStyles.actualChatArea}>
             <div className={ChatPageStyles.contactName}>
-                <div>{props.chatName}</div>
+                <div>{props.recipient}</div>
                 <img src={search} alt="" />
             </div>
 
             <div className={ChatPageStyles.actualactualChatArea}>
-                {console.log(daMessages)}
+                {console.log(daMessages)} 
                 {/* {messages.map((item, index) => (
                     <h2 key={index}>
                         {hh ? `${props.sender} --- ${item}` : `${props.recipient} --- ${item}`}
