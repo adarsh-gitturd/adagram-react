@@ -17,7 +17,7 @@ public class Application {
 	public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurer() {
 			@Override
-			public void addCorsMappings(CorsRegistry registry) {
+			public void addCorsMappings(@SuppressWarnings("null") CorsRegistry registry) {
 				registry.addMapping("/abc")
 						.allowedOrigins("http://localhost:3000")
 						.allowedMethods("*")
