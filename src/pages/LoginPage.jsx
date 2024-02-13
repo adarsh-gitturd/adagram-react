@@ -1,7 +1,6 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import bgbg from '../images/yo.jpg'
 import logo from '../images/logo.png'
 import user from '../images/user.png'
 
@@ -50,7 +49,7 @@ const LoginPage = () => {
   return (
     <div className={LoginStyles.login_container}>
         <div className={LoginStyles.header}>
-            <div className={LoginStyles.title}><a href="/">adagram</a></div>
+            <div className={LoginStyles.title}><Link to="/">adagram</Link></div>
             <Link to="/"><img src={user} alt="" className={LoginStyles.user} /></Link>
         </div>
         

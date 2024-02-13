@@ -1,5 +1,21 @@
 @import url('palette.css');
 
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+::-webkit-scrollbar-track {
+background: var(--v1);
+}
+
+::-webkit-scrollbar-thumb {
+background: var(--v4);
+}
+
+::-webkit-scrollbar-thumb:hover {
+background: var(--v3);
+}
+
 .domain_container{
     width:100%;
     height: 100vh;
@@ -25,7 +41,7 @@
 
 .title span{
     font-size: 2.5rem;
-    color: var(--v3);
+    color: var(--v4);
     font-weight: bold;
 }
 
@@ -41,7 +57,7 @@
 
 .home_about_contact a{
     text-decoration: none;
-    color: var(--v3);
+    color: var(--v4);
     font-size: 1.3rem;
     width:140px;
     height:100px;
@@ -181,14 +197,28 @@
 .igh{
     position: absolute;
     color: rgb(0, 0, 0);
-    background-color: rgb(216, 244, 244);
+    background-color: var(--v2);
+    box-shadow: 10px 10px 50px var(--v4);
     width: 277px;
+    height: 400px;
     margin-left: 45%;
-    margin-top: 10%;
+    margin-top: 5%;
     padding-left: 30px;
     border-radius: 2rem;
+    overflow-y: scroll;
 }
 
 .colorRow:hover{
     opacity: 0.7;
+    cursor: pointer;
+}
+
+.close{
+   font-size: 1.3rem;
+   margin-left: 90px;
+}
+
+.close:hover{
+    cursor: pointer;
+    opacity: .4;
 }

@@ -10,9 +10,13 @@ import themes from '../images/themes.png'
 import twitter from '../images/twitter.png'
 
 var colorThemes = [
+  ['#FAF2F2', '#F3E1E1', '#F1D1D1', '#7D5A5A'],
+  ['#F0F3FF', '#15F5BA', '#836FFF', '#211951'],
+  ['#EBF400', '#F57D1F', '#F72798', '#000000'],
   ['#EEA5A6', '#E493B3', '#B784B7', '#8E7AB5'],
   ['#9290C3', '#535C91', '#1B1A55', '#070F2B'],
-  ['#EEEDEB', '#E0CCBE', '#747264', '#3C3633']
+  ['#EEEDEB', '#E0CCBE', '#747264', '#3C3633'],
+  ['#FFE7E7', '#CAA6A6', '#B47B84', '#944E63']
 ]
 
 const DomainPage = () => {
@@ -21,6 +25,15 @@ const DomainPage = () => {
   const openPaletteOptions = () => {
     paletteOptionsVisible? setPaletteOptionsVisible(false) : setPaletteOptionsVisible(true);
   };
+
+  const setTheme = (index) => {
+    console.log(index)
+    const theme = colorThemes[index];
+    document.documentElement.style.setProperty('--v1', theme[0]);
+    document.documentElement.style.setProperty('--v2', theme[1]);
+    document.documentElement.style.setProperty('--v3', theme[2]);
+    document.documentElement.style.setProperty('--v4', theme[3]);
+  }
 
   return (
     <div className={DomainStyles.domain_container}>
@@ -60,7 +73,7 @@ const DomainPage = () => {
             
             <div className={DomainStyles.colorPalette}>
             {colorThemes.map((theme, index) => (
-              <div key={index} className={DomainStyles.colorRow}>
+              <div key={index} className={DomainStyles.colorRow} onClick={() => setTheme(index)}>
                 {theme.map((color, idx) => (
                   <div key={idx} 
                         className={DomainStyles.colorCircle} 
@@ -70,6 +83,9 @@ const DomainPage = () => {
                 ))}
               </div>
             ))}
+            <div className={DomainStyles.close} onClick={()=>{
+                            setPaletteOptionsVisible(false);
+                    }}>Close</div>
           </div>
 
           </div>
