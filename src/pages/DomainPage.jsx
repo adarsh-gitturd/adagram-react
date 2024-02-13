@@ -13,7 +13,15 @@ import twitter from '../images/twitter.png'
 //export to separate file in the future
 var colorThemes = [
   ['#FAF2F2', '#F3E1E1', '#F1D1D1', '#7D5A5A'],
+  ['#FFF2F2', '#E5E0FF', '#8EA7E9', '#7286D3'],
+  ['#F2F7A1', '#46C2CB', '#6D67E4', '#453C67'],
+  ['#FDE5D4', '#D6CC99', '#445D48', '#001524'],
+  ['#F5E8E4', '#F5C7A9', '#D1512D', '#411530'],
+  ['#FFF2F2', '#FAD4D4', '#EF9F9F', '#F47C7C'],
   ['#F0F3FF', '#15F5BA', '#836FFF', '#211951'],
+  ['#E8D8C4', '#C7B7A3', '#A94438', '#561C24'],
+  ['#FFE6C7', '#FFA559', '#FF6000', '#454545'],
+  ['#F5EBEB', '#E4D0D0', '#D5B4B4', '#867070'],
   ['#FF0000', '#950101', '#3D0000', '#000000'],
   ['#D7FBE8', '#9DF3C4', '#62D2A2', '#1FAB89'],
   ['#F3F1F5', '#F0D9FF', '#BFA2DB', '#3B0C3B'],
