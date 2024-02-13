@@ -208,10 +208,6 @@ background: var(--v3);
     overflow-y: scroll;
 }
 
-.colorRow{
-    
-}
-
 .colorRow:hover{
     opacity: 0.7;
     cursor: pointer;
