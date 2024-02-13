@@ -153,7 +153,7 @@ function ContactsBar(){
                 <div onClick={displayGroups} className={ChatPageStyles.group}>Groups</div>
             </div>
 
-            {/* code to add a new contact */}
+            {/* add a new contact */}
             {showAddContact && (
                 <div className={ChatPageStyles.addnewcontact}>
                     <span>Add a new Contact</span>
@@ -172,28 +172,32 @@ function ContactsBar(){
             )}
             {/*  */}
 
-            {/* code to add a new group */}
+            {/* add a new group */}
             
             {showAddGroup && (
                 <div className={ChatPageStyles.addnewgroup}>
                     <span className={ChatPageStyles.x}>Create a new group</span>
-                    <input type="text" placeholder='Group Name'/>
+                    <input className={ChatPageStyles.y} type="text" placeholder='Group Name'/>
                     
                     <div className={ChatPageStyles.addedmembers}>
                         <span className={ChatPageStyles.addedmember}>hey i was added  </span>
                     </div>
-                    <div>   </div>
-                    <div className='addmembers'>
-                        <label htmlFor="addmember">Add Members</label>
-                        <input type="text" />
+
+                    <div className={ChatPageStyles.xdd}>
+                        <label style={{marginBottom: '14px'}} htmlFor="addmember">Search :</label>
+                        <input style={{marginBottom: '14px'}} type="text" />
                         <div className={ChatPageStyles.userslistforgroup}>
                             {_contacts.map((item, index) => (
-                                <div key={index}>
-                                <span>{index+1}</span>
-                                <span name={item} className={ChatPageStyles.aa} onClick={e=>openChat(e)}>{item}</span>
+                                <div className={ChatPageStyles.contact} key={index}>
+                                    <span>{index+1}</span>
+                                    <span name={item}>{item}</span>
                                 </div>
                             ))}
                         </div>
+                    </div>
+                    <div className={ChatPageStyles.xd} style={{position: 'absolute', marginTop: '350px'}}>
+                        <span style={{marginRight: '90px'}}>Create Group</span>
+                        <span onClick={() => setShowAddGroup(false)}>Cancel</span>
                     </div>
                 </div>
             )}
