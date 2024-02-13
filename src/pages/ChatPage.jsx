@@ -74,12 +74,24 @@ function ContactsBar(){
     const [newUserAdded, setNewUserAdded] = useState(false);
     const [activeChat, setActiveChat] = useState(false);
 
+    const [directsOrGroupsDisplay, setDirectOrGroupsDisplay] = useState('directs');
+    const [showAddGroup, setShowAddGroup] = useState(false);
+
+
     function handleAddNewContact(){
         setShowAddContact(true);
     }
     function cancelAddContact(){
         setShowAddContact(false);
     }
+
+    function handleAddNewGroup(){
+        setShowAddGroup(true);
+    }
+    function cancelAddGroup(){
+        setShowAddGroup(false);
+    }
+
     function handleAddContactChange(e){
         const eventName = e.target.id;
         const eventValue = e.target.value;
@@ -89,6 +101,7 @@ function ContactsBar(){
             [eventName] : eventValue,
         }));
     };
+
     const checkValidContactToAdd = async (e) => {
         e.preventDefault();
         let realUsere = await axios.get("http://localhost:8081/users");
@@ -101,6 +114,7 @@ function ContactsBar(){
         if(huh){
             setNewUserAdded(true);
             _contacts.push(form.username);
+            setDirectOrGroupsDisplay('directs');
             // console.log(_contacts);
             cancelAddContact();
         }
@@ -112,23 +126,31 @@ function ContactsBar(){
         setActiveChat(chat);
     }
 
+    function displayDirects(){
+        setDirectOrGroupsDisplay('directs')
+    }
+
+    function displayGroups(){
+        setDirectOrGroupsDisplay('groups')
+    }
+
     return(
         <div className={ChatPageStyles.contacts_bar}>
             <div className={ChatPageStyles.divdiv}>
                 <span className={ChatPageStyles.cb_title}>Messages</span>
-                <h1>{sessionStorage.getItem('loggedInUser')}</h1>
+                <h2>{sessionStorage.getItem('loggedInUser')}</h2>
                 <img src={add_user} alt="" className={ChatPageStyles.addContact} onClick={handleAddNewContact}/>
-                <img src={add_group} alt="" className={ChatPageStyles.addGroup} />
+                <img src={add_group} alt="" className={ChatPageStyles.addGroup} onClick={handleAddNewGroup} />
             </div>
 
             <div className={ChatPageStyles.search_set}>
-                <input type="text" placeholder='Search for new Chat'className={ChatPageStyles.searchh}/>
+                <input type="text" placeholder='Search for chat'className={ChatPageStyles.searchh}/>
                 <img src={search} alt="" className={ChatPageStyles.searchimg}/>
             </div>
 
             <div className={ChatPageStyles.direct_or_group}>
-                <div className={ChatPageStyles.direct}>Direct</div>
-                <div className={ChatPageStyles.group}>Groups</div>
+                <div onClick={displayDirects} className={ChatPageStyles.direct}>Direct</div>
+                <div onClick={displayGroups} className={ChatPageStyles.group}>Groups</div>
             </div>
 
             {/* code to add a new contact */}
@@ -150,7 +172,34 @@ function ContactsBar(){
             )}
             {/*  */}
 
-            {newUserAdded && (
+            {/* code to add a new group */}
+            
+            {showAddGroup && (
+                <div className={ChatPageStyles.addnewgroup}>
+                    <span className={ChatPageStyles.x}>Create a new group</span>
+                    <input type="text" placeholder='Group Name'/>
+                    
+                    <div className={ChatPageStyles.addedmembers}>
+                        <span className={ChatPageStyles.addedmember}>hey i was added  </span>
+                    </div>
+                    <div>   </div>
+                    <div className='addmembers'>
+                        <label htmlFor="addmember">Add Members</label>
+                        <input type="text" />
+                        <div className={ChatPageStyles.userslistforgroup}>
+                            {_contacts.map((item, index) => (
+                                <div key={index}>
+                                <span>{index+1}</span>
+                                <span name={item} className={ChatPageStyles.aa} onClick={e=>openChat(e)}>{item}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/*  */}
+            {newUserAdded && directsOrGroupsDisplay==='directs' && (
                 <div className={ChatPageStyles.directs}>
                     {/* {console.log({_contacts})} */}
                     {_contacts.map((item, index) => (
