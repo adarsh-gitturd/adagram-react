@@ -9,9 +9,15 @@ import pinterest from '../images/pinterest.png'
 import themes from '../images/themes.png'
 import twitter from '../images/twitter.png'
 
+
+//export to separate file in the future
 var colorThemes = [
   ['#FAF2F2', '#F3E1E1', '#F1D1D1', '#7D5A5A'],
   ['#F0F3FF', '#15F5BA', '#836FFF', '#211951'],
+  ['#FF0000', '#950101', '#3D0000', '#000000'],
+  ['#D7FBE8', '#9DF3C4', '#62D2A2', '#1FAB89'],
+  ['#F3F1F5', '#F0D9FF', '#BFA2DB', '#3B0C3B'],
+  ['#F1F6F9', '#9BA4B5', '#394867', '#212A3E'],
   ['#EBF400', '#F57D1F', '#F72798', '#000000'],
   ['#EEA5A6', '#E493B3', '#B784B7', '#8E7AB5'],
   ['#9290C3', '#535C91', '#1B1A55', '#070F2B'],
@@ -21,13 +27,14 @@ var colorThemes = [
 
 const DomainPage = () => {
   const [paletteOptionsVisible, setPaletteOptionsVisible] = useState(false);
+  const [selectedTheme, setSelectedTheme] = useState(0);
 
   const openPaletteOptions = () => {
     paletteOptionsVisible? setPaletteOptionsVisible(false) : setPaletteOptionsVisible(true);
   };
 
-  const setTheme = (index) => {
-    console.log(index)
+  const setTheme = (index) => { 
+    setSelectedTheme(index);
     const theme = colorThemes[index];
     document.documentElement.style.setProperty('--v1', theme[0]);
     document.documentElement.style.setProperty('--v2', theme[1]);
@@ -73,14 +80,16 @@ const DomainPage = () => {
             
             <div className={DomainStyles.colorPalette}>
             {colorThemes.map((theme, index) => (
+
               <div key={index} className={DomainStyles.colorRow} onClick={() => setTheme(index)}>
                 {theme.map((color, idx) => (
                   <div key={idx} 
-                        className={DomainStyles.colorCircle} 
-                        style={{ marginRight: '10px', borderRadius: '50%', display:'inline-block', width: '50px', height: '50px', backgroundColor: color }}>
+                  className={DomainStyles.colorCircle} 
+                  style={{ marginRight: '10px', borderRadius: '50%', display:'inline-block', width: '50px', height: '50px', backgroundColor: color }}>
 
                   </div>
                 ))}
+                <hr />
               </div>
             ))}
             <div className={DomainStyles.close} onClick={()=>{
