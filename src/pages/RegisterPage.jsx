@@ -45,7 +45,7 @@ const RegisterPage = () => {
   return (
     <div className={RegisterStyles.register_container}>
         <div className={RegisterStyles.header}>
-            <div className={RegisterStyles.title}><a href="/">adagram</a></div>
+            <div className={RegisterStyles.title}><Link to="/">adagram</Link></div>
             <Link to="/"><img src={user} alt="" className={RegisterStyles.user} /></Link>
         </div>
     
