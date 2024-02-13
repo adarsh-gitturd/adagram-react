@@ -19,6 +19,7 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    @SuppressWarnings("null")
     @PostMapping("user")
     public User uhm(@RequestBody User user) {
         return userRepository.save(user);

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @CrossOrigin("http://localhost:3000") //connect to react 's port'
 @Controller
 public class SocketController {
+    @SuppressWarnings("unused")
     private final Logger logger = LoggerFactory.getLogger(SocketController.class);
 
     // @MessageMapping("/chat") // from client
