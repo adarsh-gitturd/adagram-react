@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import bgbg from '../images/bgbgbg.jpg'
+import bgbg from '../images/yo.jpg'
 import logo from '../images/logo.png'
 import user from '../images/user.png'
 
@@ -64,7 +64,7 @@ const LoginPage = () => {
                 <Link to="/register" className={LoginStyles.newmeansreg}>New here? Register</Link>
             </div>
             
-            <img src={bgbg} alt="" className={LoginStyles.login_bg} />
+            <div alt="" className={LoginStyles.login_bg}></div>
         </div>
 
     

@@ -12,7 +12,7 @@ const DomainPage = () => {
   return (
     <div className={DomainStyles.domain_container}>
         <div className={DomainStyles.header}>
-            <div className={DomainStyles.title}><span>adagram</span></div>
+            <div className={DomainStyles.title}><span>projectAdagram</span></div>
             <div className={DomainStyles.home_about_contact}>
               <a href="#">Home</a>
               <a href="#">About</a>

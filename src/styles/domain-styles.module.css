@@ -1,12 +1,9 @@
-*{
-    font-family: 'Kanit', sans-serif;
-    font-family: 'Prompt', sans-serif;
-}
+@import url('palette.css');
 
 .domain_container{
     width:100%;
     height: 100vh;
-    background-color:#DAFFFB;
+    background-color: var(--v2);
 }
 
 
@@ -14,7 +11,7 @@
     position:relative;
     width: 100%;
     height: 90px;
-    background-color: #dafffb;
+    background-color: var(--v2);
 }
 
 .title{
@@ -27,8 +24,8 @@
 }
 
 .title span{
-    font-size: 3rem;
-    color: 001C30;
+    font-size: 2.5rem;
+    color: var(--v3);
     font-weight: bold;
 }
 
@@ -44,17 +41,17 @@
 
 .home_about_contact a{
     text-decoration: none;
-    color: #001C30;
+    color: var(--v3);
     font-size: 1.3rem;
     width:140px;
     height:100px;
     padding-top: 70px;
     text-align: center;
+    font-weight: bold;
 }
 
 .home_about_contact a:hover{
-    color:#311D3F;
-    background-color: #beefff;
+    background-color: var(--v1);
     transition: 800ms linear;
 }
 
@@ -71,7 +68,7 @@
     /* background: linear-gradient(rgba(59, 5, 5, 0.1),
      rgba(27, 0, 28, 0.9)), url(../images/bgbg.jpg) no-repeat;
     background-size: 100% 100%; */
-    background-color: #beefff;
+    background-color: var(--v3);
 }
 
 
@@ -86,7 +83,7 @@
 }
 
 .cmdm span{
-    color: 001C30;
+    color: var(--v4);
     font-size: 2.1rem;
     margin-left: 300px;
 }
@@ -98,11 +95,12 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+    color: var(--v4);
 
 }
 
 .welcome{
-    color: #001C30;
+    color: var(--v4);
     font-size: 3rem;
     margin-left: 10px;
     margin-top: 100px;
@@ -110,7 +108,7 @@
 }
 
 .desc{
-    color: #001C30;
+    color: var(--v4);
     font-size: 2rem;
     font-weight: 100;
     margin-top: 60px;
@@ -124,7 +122,7 @@
     margin-top: 530px;
     margin-left: 45%;
     font-size: 2.3rem;
-    color: #001C30;
+    color: var(--v4);
 }
 
 .connect a{

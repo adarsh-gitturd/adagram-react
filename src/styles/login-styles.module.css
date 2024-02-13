@@ -1,12 +1,10 @@
-*{
-    font-family: 'Kanit', sans-serif;
-    font-family: 'Prompt', sans-serif;
-}
+@import url('palette.css');
+
 
 .login_container{
     width:100%;
     height: 100vh;
-    background-color:#311D3F;
+    background-color:var(--v2);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -21,15 +19,15 @@
 
 .title a{
     font-size: 3rem;
-    color: 001C30;
+    color: var(--v3);
     font-weight: bold;
     text-decoration: none;
 }
 
 
 .title a:hover{
-    transition: 400ms linear;
-    font-size: 3.2rem;
+    transition: 300ms linear;
+    font-size: 3.02rem;
     opacity: .6;
 }
 
@@ -44,7 +42,7 @@
     position:absolute;
     width: 50%;
     height: 100%;
-    background-color: #88304E;
+    background-color: var(--v3);
     border-top-left-radius: 5rem;
     border-bottom-left-radius: 5rem;
     display: flex;
@@ -61,40 +59,40 @@
     margin-top: 20px;
     margin-left: 80px;
     font-weight: bold;
-    color: #311D3F;
+    color: var(--v4);
 }
 
 .login_username{
-    background-color: #ffa5a5;
+    background-color: var(--v2);
     border-radius: 3rem;
-    border-color: #311D3F;
+    border-color: var(--v4);
     margin-left: 90px;
     width:300px;
     height: 40px;
-    color: #1c0030;
+    color: var(v4);
     padding-left: 30px;
     margin-top: 35px;
 }
 
 .login_pass{
-    background-color: #ffa5a5;
+    background-color: var(--v2);
     border-radius: 3rem;
-    border-color: #311D3F;
+    border-color: var(--v4);
     margin-left: 90px;
     width:300px;
     height: 40px;
-    color: rgb(53, 53, 53);
+    color: var(--v4);
     padding-left: 30px;
     margin-top: 35px;
 }
 
 .login_button{
-    background-color: #522546;
+    background-color: var(--v1);
     border-radius: 3rem;
     margin-left: 110px;
     width:280px;
     height: 40px;
-    color: 001C30;
+    color: var(--v4);
     font-size: 1.3rem;
     font-weight: bold;
     margin-top: 35px;
@@ -102,10 +100,11 @@
 
 .newmeansreg{
     text-decoration: none;
-    color: #311D3F;
+    color: var(--v4);
     margin-left: 180px;
-    margin-top: 50px;
-    font-size: 1.1rem;
+    margin-top: 40px;
+    font-size: 1.15rem;
+    font-weight: bold;
 }
 
 .login_bg{
@@ -115,6 +114,10 @@
     margin-left: 50%;
     border-top-right-radius: 5rem;
     border-bottom-right-radius: 5rem;
+    background-image:
+                linear-gradient(180deg,
+                    var(--v4), var(--v3),var(--v2), var(--v3),var(--v4));
+    background-size: 100% 100%;
 }
 
 .footer_socials{
