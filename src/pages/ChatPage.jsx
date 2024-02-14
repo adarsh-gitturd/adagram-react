@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState , useEffect } from 'react';
+import React, { useState } from 'react';
 import ChatPageStyles from '../styles/chat-page-styles.module.css';
 
 import add_group from '../images/chat-page/add-group.png';
@@ -148,10 +148,6 @@ function ContactsBar(){
         setDirectOrGroupsDisplay('groups')
     }
 
-    useEffect(() => {
-        // console.log(groupMembers);
-      }, [groupMembers]); 
-
     function addGroupMember(index){
         // setGroupMembers(prev => [...prev, _contacts[index]]);
 
@@ -201,13 +197,13 @@ function ContactsBar(){
           });
     }
 
-    useEffect(()=>{
-        console.log(`display : ${display}`);
-    }, [display])
+    // useEffect(()=>{
+    //     console.log(`display : ${display}`);
+    // }, [display])
 
-    useEffect(()=>{
-        console.log(`group members : ${groupMembers}`);
-    }, [groupMembers])
+    // useEffect(()=>{
+    //     console.log(`group members : ${groupMembers}`);
+    // }, [groupMembers])
 
     return(
         <div className={ChatPageStyles.contacts_bar}>
@@ -254,22 +250,22 @@ function ContactsBar(){
                     <span className={ChatPageStyles.x}>Create a new group</span>
                     <input className={ChatPageStyles.y} type="text" placeholder='Group Name'/>
                     
-                    <div>
-      <div className={ChatPageStyles.addedmembers}>
-        {groupMembers.map((member, index) => {
-          if (!member.includes('$')) {
-            return (
-              <span onClick={() => removeFromGroup(index)} className={ChatPageStyles.contactt} key={index}>
-                {member}
-              </span>
-            );
-          } else {
-            // If member contains "$", do nothing
-            return null;
-          }
-        })}
-      </div>
-    </div>
+                <div>
+                    <div className={ChatPageStyles.addedmembers}>
+                        {groupMembers.map((member, index) => {
+                        if (!member.includes('$')) {
+                            return (
+                            <span onClick={() => removeFromGroup(index)} className={ChatPageStyles.contactt} key={index}>
+                                {member}
+                            </span>
+                            );
+                        } else {
+                            // If member contains "$", do nothing
+                            return null;
+                        }
+                    })}
+                    </div>
+                </div>
 
                     <div className={ChatPageStyles.xdd}>
                         <label style={{marginBottom: '14px'}} htmlFor="addmember">Search :</label>
@@ -286,7 +282,7 @@ function ContactsBar(){
                         </div>
 
                     </div>
-                    <div className={ChatPageStyles.xd} style={{position: 'absolute', marginTop: '350px'}}>
+                    <div className={ChatPageStyles.xd} style={{position: 'absolute', marginTop: '550px'}}>
                         <span style={{marginRight: '90px'}}>Create Group</span>
                         <span onClick={cancelAddGroup}>Cancel</span>
                     </div>

@@ -116,7 +116,8 @@ const DomainPage = () => {
           <a href=""><img src={twitter} alt="" className={DomainStyles.twitter} /></a>
           <a href=""><img src={pinterest} alt="" className={DomainStyles.pinterest} /></a>
         </div>
-
+        
+        
 
     </div>
     
