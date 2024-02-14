@@ -93,7 +93,14 @@ function ContactsBar(){
     function cancelAddGroup(){
         setShowAddGroup(false);
         setGroupMembers([]);
-        setDisplay(prev => prev.map(() => true));
+        // setDisplay(prev => prev.map(() => true));
+        setDisplay(prev => (
+            Array(_contacts.length).fill(true)
+          ));
+
+        setGroupMembers(prev => (
+            Array(_contacts.length).fill('$')
+          ));
     }
 
     function handleAddContactChange(e){
@@ -104,25 +111,26 @@ function ContactsBar(){
             ...prev,
             [eventName] : eventValue,
         }));
-
-        setDisplay(prev => [...prev, true]);
+        
     };
-
+    
     const checkValidContactToAdd = async (e) => {
         e.preventDefault();
         let realUsere = await axios.get("http://localhost:8081/users");
         let realUsers = realUsere.data;
         const huh = realUsers.some(entry =>
             Object.entries(form).every(([key, value]) =>
-              entry.hasOwnProperty(key) && entry[key] == value
+            entry.hasOwnProperty(key) && entry[key] == value
             )
-          );
-        if(huh){
-            setNewUserAdded(true);
-            _contacts.push(form.username);
-            setDirectOrGroupsDisplay('directs');
-            // console.log(_contacts);
-            cancelAddContact();
+            );
+            if(huh){
+                setNewUserAdded(true);
+                setDisplay(prev => [...prev, true]);
+                setGroupMembers(prev => [...prev, '$']);
+                _contacts.push(form.username);
+                setDirectOrGroupsDisplay('directs');
+                // console.log(_contacts);
+                cancelAddContact();
         }
       };
     
@@ -141,16 +149,65 @@ function ContactsBar(){
     }
 
     useEffect(() => {
-        console.log(groupMembers);
+        // console.log(groupMembers);
       }, [groupMembers]); 
 
     function addGroupMember(index){
-        setGroupMembers(prev => [...prev, _contacts[index]]);
+        // setGroupMembers(prev => [...prev, _contacts[index]]);
+
+        setGroupMembers(prevGroupMembers => {
+            const updatedMembers = [...prevGroupMembers]; // Create a copy of the array
+        
+            // Check if the element at the given index exists and is a string
+              // Check if the last character of the member at the given index is "$"
+            if(typeof updatedMembers[index] === 'string' && updatedMembers[index].startsWith('$')){
+                updatedMembers[index] = updatedMembers[index].substring(1);
+                updatedMembers[index] = _contacts[index];
+                console.log("XDXD")
+            }
+            else if (typeof updatedMembers[index] === 'string' && updatedMembers[index].endsWith('$')) {
+            // Remove "$" from the member
+            console.log('lmao')
+            updatedMembers[index] = updatedMembers[index].slice(0, -1);
+            } else {
+            // Add a new element at the index
+            console.log('lol')
+            updatedMembers.splice(index, 0, _contacts[index]);
+            }
+            
+        
+            return updatedMembers; // Return the updated array
+          });
+
         setDisplay(prev => (
             prev.map((item, i) => (i === index ? false : prev[i]))
           ));
         // console.log(groupMembers);
     }
+
+    function removeFromGroup(index){
+        setGroupMembers(prevGroupMembers => {
+            const updatedGroupMembers = [...prevGroupMembers]; // Create a copy of the array
+            updatedGroupMembers[index] += '$'; // Append "$" to the element at the specified index
+            return updatedGroupMembers; // Return the updated array
+          });
+
+
+        setDisplay(prev => {
+            const updatedDisplay = [...prev]; // Create a copy of the array
+            updatedDisplay[index] = true; // Update the value at the specified index
+            return updatedDisplay; // Return the updated array
+
+          });
+    }
+
+    useEffect(()=>{
+        console.log(`display : ${display}`);
+    }, [display])
+
+    useEffect(()=>{
+        console.log(`group members : ${groupMembers}`);
+    }, [groupMembers])
 
     return(
         <div className={ChatPageStyles.contacts_bar}>
@@ -197,11 +254,22 @@ function ContactsBar(){
                     <span className={ChatPageStyles.x}>Create a new group</span>
                     <input className={ChatPageStyles.y} type="text" placeholder='Group Name'/>
                     
-                    <div className={ChatPageStyles.addedmembers}>
-                        {groupMembers.map((member, index) => (
-                            <span key={index}>{member}</span>
-                        ))}
-                    </div>
+                    <div>
+      <div className={ChatPageStyles.addedmembers}>
+        {groupMembers.map((member, index) => {
+          if (!member.includes('$')) {
+            return (
+              <span onClick={() => removeFromGroup(index)} className={ChatPageStyles.contactt} key={index}>
+                {member}
+              </span>
+            );
+          } else {
+            // If member contains "$", do nothing
+            return null;
+          }
+        })}
+      </div>
+    </div>
 
                     <div className={ChatPageStyles.xdd}>
                         <label style={{marginBottom: '14px'}} htmlFor="addmember">Search :</label>

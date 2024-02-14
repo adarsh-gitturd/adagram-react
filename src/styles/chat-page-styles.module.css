@@ -250,6 +250,24 @@
     opacity: .7;
 }
 
+.contactt::before{
+    display: inline-block;
+}
+.contactt{
+    font-size: 1.1rem;
+    width: fit-content; 
+    display: grid;
+    place-items: center;
+    height: 30px; 
+    background-color: var(--v2);
+    border-radius: 5rem;
+    border: 1px solid var(--v4);
+    text-shadow: 2px 2px 15px var(--v4);
+    box-shadow: 2px 2px var(--v4);
+    padding: 5px;
+    margin-bottom: 15px;
+}
+
 .contact span:nth-child(1){
     font-size: 1.2rem;
     display: grid;
