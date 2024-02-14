@@ -80,6 +80,8 @@ function ContactsBar(){
     const [groupMembers, setGroupMembers] = useState([]);
     const [display, setDisplay] = useState([]);
 
+    const [groupName, setGroupName] = useState('');
+
     function handleAddNewContact(){
         setShowAddContact(true);
     }
@@ -197,6 +199,28 @@ function ContactsBar(){
           });
     }
 
+    function updateGroupName(e){
+        setGroupName(e.target.value);
+    }
+
+    function createGroup(){
+        if(groupName){
+            // alert(groupName);
+            setShowAddGroup(false);
+            setDirectOrGroupsDisplay('groups');
+
+            setGroupMembers([]);
+            // setDisplay(prev => prev.map(() => true));
+            setDisplay(prev => (
+                Array(_contacts.length).fill(true)
+              ));
+    
+            setGroupMembers(prev => (
+                Array(_contacts.length).fill('$')
+              ));
+        }
+    }
+
     // useEffect(()=>{
     //     console.log(`display : ${display}`);
     // }, [display])
@@ -248,7 +272,7 @@ function ContactsBar(){
             {showAddGroup && (
                 <div className={ChatPageStyles.addnewgroup}>
                     <span className={ChatPageStyles.x}>Create a new group</span>
-                    <input className={ChatPageStyles.y} type="text" placeholder='Group Name'/>
+                    <input onChange={e=>updateGroupName(e)}className={ChatPageStyles.y} value={groupName} type="text" placeholder='Group Name'/>
                     
                 <div>
                     <div className={ChatPageStyles.addedmembers}>
@@ -283,7 +307,7 @@ function ContactsBar(){
 
                     </div>
                     <div className={ChatPageStyles.xd} style={{position: 'absolute', marginTop: '550px'}}>
-                        <span style={{marginRight: '90px'}}>Create Group</span>
+                        <span onClick={createGroup} style={{marginRight: '90px'}}>Create Group</span>
                         <span onClick={cancelAddGroup}>Cancel</span>
                     </div>
                 </div>
@@ -296,6 +320,17 @@ function ContactsBar(){
                     {_contacts.map((item, index) => (
                         <React.Fragment key={index}>
                         <div name={item} className={ChatPageStyles.individualContact} onClick={e=>openChat(e)}>{item}</div>
+                        </React.Fragment>
+                    ))}
+                </div>
+            )}
+
+            {directsOrGroupsDisplay==='groups' && (
+                <div className={ChatPageStyles.directs}>
+                    {/* {console.log({_contacts})} */}
+                    {groupMembers.map((item, index) => (
+                        <React.Fragment key={index}>
+                        <div name={item}>{item}</div>
                         </React.Fragment>
                     ))}
                 </div>
