@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import ChatPageStyles from '../styles/chat-page-styles.module.css';
 
 import add_group from '../images/chat-page/add-group.png';
@@ -77,6 +77,8 @@ function ContactsBar(){
     const [directsOrGroupsDisplay, setDirectOrGroupsDisplay] = useState('directs');
     const [showAddGroup, setShowAddGroup] = useState(false);
 
+    const [groupMembers, setGroupMembers] = useState([]);
+    const [display, setDisplay] = useState([]);
 
     function handleAddNewContact(){
         setShowAddContact(true);
@@ -90,6 +92,8 @@ function ContactsBar(){
     }
     function cancelAddGroup(){
         setShowAddGroup(false);
+        setGroupMembers([]);
+        setDisplay(prev => prev.map(() => true));
     }
 
     function handleAddContactChange(e){
@@ -100,6 +104,8 @@ function ContactsBar(){
             ...prev,
             [eventName] : eventValue,
         }));
+
+        setDisplay(prev => [...prev, true]);
     };
 
     const checkValidContactToAdd = async (e) => {
@@ -132,6 +138,18 @@ function ContactsBar(){
 
     function displayGroups(){
         setDirectOrGroupsDisplay('groups')
+    }
+
+    useEffect(() => {
+        console.log(groupMembers);
+      }, [groupMembers]); 
+
+    function addGroupMember(index){
+        setGroupMembers(prev => [...prev, _contacts[index]]);
+        setDisplay(prev => (
+            prev.map((item, i) => (i === index ? false : prev[i]))
+          ));
+        // console.log(groupMembers);
     }
 
     return(
@@ -180,7 +198,9 @@ function ContactsBar(){
                     <input className={ChatPageStyles.y} type="text" placeholder='Group Name'/>
                     
                     <div className={ChatPageStyles.addedmembers}>
-                        <span className={ChatPageStyles.addedmember}>hey i was added  </span>
+                        {groupMembers.map((member, index) => (
+                            <span key={index}>{member}</span>
+                        ))}
                     </div>
 
                     <div className={ChatPageStyles.xdd}>
@@ -188,16 +208,19 @@ function ContactsBar(){
                         <input style={{marginBottom: '14px'}} type="text" />
                         <div className={ChatPageStyles.userslistforgroup}>
                             {_contacts.map((item, index) => (
-                                <div className={ChatPageStyles.contact} key={index}>
-                                    <span>{index+1}</span>
-                                    <span name={item}>{item}</span>
-                                </div>
+                                display[index] && (
+                                    <div onClick={() => addGroupMember(index)} className={ChatPageStyles.contact} key={index}>
+                                        <span>{index + 1}</span>
+                                        <span name={item}>{item}</span>
+                                    </div>
+                                )
                             ))}
                         </div>
+
                     </div>
                     <div className={ChatPageStyles.xd} style={{position: 'absolute', marginTop: '350px'}}>
                         <span style={{marginRight: '90px'}}>Create Group</span>
-                        <span onClick={() => setShowAddGroup(false)}>Cancel</span>
+                        <span onClick={cancelAddGroup}>Cancel</span>
                     </div>
                 </div>
             )}
