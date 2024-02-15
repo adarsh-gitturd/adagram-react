@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState, useEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 import ChatPageStyles from '../styles/chat-page-styles.module.css';
 
 import add_group from '../images/chat-page/add-group.png';
@@ -79,9 +79,9 @@ function ContactsBar(){
     const [activeGroup, setActiveGroup] = useState(false);
 
     useEffect(()=>{
-        // console.log(localStorage.getItem('THEMEE'))
-        if(localStorage.getItem('THEMEINDEX'))
-          setTheme(null, localStorage.getItem('THEMEINDEX'));
+        // console.log(sessionStorage.getItem('THEMEE'))
+        if(sessionStorage.getItem('THEMEINDEX'))
+          setTheme(null, sessionStorage.getItem('THEMEINDEX'));
       }, [])
 
     function handleAddNewContact(){

@@ -32,13 +32,13 @@ export const setTheme = (setSelectedTheme, index) => {
     }
     const theme = colorThemes[index];
     if(theme){
-        localStorage.setItem('THEMEE', theme);
+        sessionStorage.setItem('THEMEE', theme);
     }
-    localStorage.setItem('--v1', theme[0]);
-    localStorage.setItem('--v2', theme[1]);
-    localStorage.setItem('--v3', theme[2]);
-    localStorage.setItem('--v4', theme[3]);
-    localStorage.setItem("THEMEINDEX", index);
+    sessionStorage.setItem('--v1', theme[0]);
+    sessionStorage.setItem('--v2', theme[1]);
+    sessionStorage.setItem('--v3', theme[2]);
+    sessionStorage.setItem('--v4', theme[3]);
+    sessionStorage.setItem("THEMEINDEX", index);
 
     document.documentElement.style.setProperty('--v1', theme[0]);
     document.documentElement.style.setProperty('--v2', theme[1]);

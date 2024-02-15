@@ -28,9 +28,9 @@ const LoginPage = () => {
   /////////
 
   useEffect(()=>{
-    // console.log(localStorage.getItem('THEMEE'))
-    if(localStorage.getItem('THEMEINDEX'))
-      setTheme(null, localStorage.getItem('THEMEINDEX'));
+    // console.log(sessionStorage.getItem('THEMEE'))
+    if(sessionStorage.getItem('THEMEINDEX'))
+      setTheme(null, sessionStorage.getItem('THEMEINDEX'));
   }, [])
 
 

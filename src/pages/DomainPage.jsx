@@ -20,9 +20,9 @@ const DomainPage = () => {
   };
 
   useEffect(()=>{
-    // console.log(localStorage.getItem('THEMEE'))
-    if(localStorage.getItem('THEMEINDEX'))
-      setTheme(setSelectedTheme, localStorage.getItem('THEMEINDEX'));
+    // console.log(sessionStorage.getItem('THEMEE'))
+    if(sessionStorage.getItem('THEMEINDEX'))
+      setTheme(setSelectedTheme, sessionStorage.getItem('THEMEINDEX'));
   }, [])
 
   return (
