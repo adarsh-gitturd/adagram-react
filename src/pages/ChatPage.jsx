@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import ChatPageStyles from '../styles/chat-page-styles.module.css';
 
 import add_group from '../images/chat-page/add-group.png';
@@ -13,6 +13,7 @@ import settings from '../images/chat-page/settings.png';
 import logo from '../images/logo.png';
 import UltimateSocket from './UltimateSocket';
 
+import { setTheme } from './theme';
 
 const ChatPage = () => {
   return (
@@ -75,6 +76,14 @@ function ContactsBar(){
     const [_groups, _setGroups] = useState([]);
     const [_groupNames, _setGroupNames] = useState([]);
 
+    const [activeGroup, setActiveGroup] = useState(false);
+
+    useEffect(()=>{
+        // console.log(localStorage.getItem('THEMEE'))
+        if(localStorage.getItem('THEMEINDEX'))
+          setTheme(null, localStorage.getItem('THEMEINDEX'));
+      }, [])
+
     function handleAddNewContact(){
         setShowAddContact(true);
     }
@@ -133,6 +142,16 @@ function ContactsBar(){
     function openChat(e){
         let chat = e.nativeEvent.target.innerHTML;
         setActiveChat(chat);
+    }
+
+    function openGroup(e){
+        let group = e.nativeEvent.target.innerHTML;
+        let endIndex = group.indexOf('<');
+        if (endIndex !== -1) {
+            group = group.slice(0, endIndex);
+        }
+
+        setActiveGroup(group);
     }
 
     function displayDirects(){
@@ -203,7 +222,7 @@ function ContactsBar(){
             _setGroups(prev => {
                 if (prev.length === 0) {
                     _setGroupNames([groupName]);
-                    console.log("IGHT")
+                    // console.log("IGHT")
                     return [nonDollarMembers];
                 } else {
                     const newGroup = [...prev];
@@ -217,7 +236,7 @@ function ContactsBar(){
             setGroupMembers([]);
             setDisplay(Array(_contacts.length).fill(true));
             setGroupMembers(Array(_contacts.length).fill('$'));
-
+            setGroupName('');
         }
     }
 
@@ -322,13 +341,18 @@ function ContactsBar(){
             )}
 
             {directsOrGroupsDisplay==='groups' && (
-                <div className={ChatPageStyles.directs}>
+                <div className={ChatPageStyles.groups}>
                     {/* {console.log({_contacts})} */}
                     {_groups.map((item, index) => (
                         <React.Fragment key={index}>
-                            {_groupNames[index]}
-                            <div name={item}>{item}</div>
-                            <hr />
+                            
+                            <div onClick={e=>openGroup(e)} name={item} className={ChatPageStyles.individualGroup}>
+                                {_groupNames[index]} 
+                                <div>
+                                    {item.join(', ').length > 34 ? item.join(', ').slice(0, 34) + '...' : item.join(',')}
+                                </div>
+                            </div>
+                            {/* <hr /> */}
                         </React.Fragment>
                     ))}
                 </div>
@@ -342,6 +366,13 @@ function ContactsBar(){
                 />
             ) : null}
 
+            
+
+            {/* 
+            
+                GROUP CHATS??    
+
+            */}
 
         </div>
     )

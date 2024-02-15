@@ -4,6 +4,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import logo from '../images/logo.png';
 import user from '../images/user.png';
 
+import { setTheme } from './theme';
+import { useEffect } from 'react';
+
 import RegisterStyles from '../styles/register-styles.module.css';
 
 
@@ -35,6 +38,12 @@ const RegisterPage = () => {
             [eventName] : eventValue
         }));
     };
+
+    useEffect(()=>{
+        // console.log(localStorage.getItem('THEMEE'))
+        if(localStorage.getItem('THEMEINDEX'))
+          setTheme(null, localStorage.getItem('THEMEINDEX'));
+      }, [])
 
     const submit = async (e) => {
         e.preventDefault();

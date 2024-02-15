@@ -2,18 +2,18 @@
 
 ::-webkit-scrollbar {
     width: 10px;
-  }
+}
   
 ::-webkit-scrollbar-track {
-background: var(--v1);
+    background: var(--v1);
 }
 
 ::-webkit-scrollbar-thumb {
-background: var(--v4);
+    background: var(--v4);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-background: var(--v3);
+    background: var(--v3);
 }
 
 *{
@@ -202,6 +202,8 @@ background: var(--v3);
 .directs{
     height: 80%;
 }
+
+
 
 .addnewcontact{
     position: absolute;
@@ -393,7 +395,7 @@ background: var(--v3);
     width: calc(100% - 20px);
     height: 60px;
     background-color: var(--v1);
-    border-bottom: 1px #311D3F solid;
+    border-bottom: 1px solid var(--v4);
     margin: 0px;
     font-size: 1.2rem;
     padding-top: 25px;
@@ -403,6 +405,29 @@ background: var(--v3);
 .individualContact:hover{
     opacity: .7;
     cursor: pointer;
+}
+
+.individualGroup{
+    width: calc(100% - 20px);
+    height: 60px;   
+    background-color: var(--v1);
+    border-bottom: 1px solid var(--v4);
+    margin: 0px;
+    font-size: 1.2rem;
+    padding-top: 25px;
+    padding-left: 20px;   
+}
+
+.individualGroup:hover{
+    opacity: .7;
+    cursor: pointer;
+}
+
+.individualGroup div{
+    position: absolute;
+    margin-left: 250px;
+    margin-top: 8px;
+    font-size: 1rem;
 }
 
 .actualChatArea{

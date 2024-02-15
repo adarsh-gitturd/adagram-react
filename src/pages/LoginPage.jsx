@@ -1,8 +1,10 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import logo from '../images/logo.png'
 import user from '../images/user.png'
+
+import { setTheme } from './theme'
 
 import LoginStyles from '../styles/login-styles.module.css'
 
@@ -10,6 +12,8 @@ import fb from '../images/fb.png'
 import insta from '../images/insta.png'
 import pinterest from '../images/pinterest.png'
 import twitter from '../images/twitter.png'
+
+
 
 const LoginPage = () => {
 
@@ -20,6 +24,16 @@ const LoginPage = () => {
         username:'',
         password:'',
     });
+
+  /////////
+
+  useEffect(()=>{
+    // console.log(localStorage.getItem('THEMEE'))
+    if(localStorage.getItem('THEMEINDEX'))
+      setTheme(null, localStorage.getItem('THEMEINDEX'));
+  }, [])
+
+
 
   function updateCredentialChecker(e){
       const eventName = e.target.name;
