@@ -24,15 +24,6 @@ const ChatPage = () => {
   )
 }
 
-/* SideBar Components:
-    -> Logo
-    -> Messages
-    -> Notifications
-    -> Contacts
-    -> Settings
-    -> Logout
-    -> Help
-*/
 function SideBar(){
     return(
     <div className={ChatPageStyles.side_bar}>
@@ -63,7 +54,6 @@ function SideBar(){
 }
 
 var _contacts = [];
-
 function ContactsBar(){
     const [showAddContact, setShowAddContact] = useState(false);
     const [form, setForm] = useState(
@@ -82,6 +72,9 @@ function ContactsBar(){
 
     const [groupName, setGroupName] = useState('');
 
+    const [_groups, _setGroups] = useState([]);
+    const [_groupNames, _setGroupNames] = useState([]);
+
     function handleAddNewContact(){
         setShowAddContact(true);
     }
@@ -92,6 +85,7 @@ function ContactsBar(){
     function handleAddNewGroup(){
         setShowAddGroup(true);
     }
+
     function cancelAddGroup(){
         setShowAddGroup(false);
         setGroupMembers([]);
@@ -137,7 +131,6 @@ function ContactsBar(){
       };
     
     function openChat(e){
-        // console.log(e.nativeEvent.target.innerHTML);
         let chat = e.nativeEvent.target.innerHTML;
         setActiveChat(chat);
     }
@@ -151,30 +144,27 @@ function ContactsBar(){
     }
 
     function addGroupMember(index){
-        // setGroupMembers(prev => [...prev, _contacts[index]]);
 
         setGroupMembers(prevGroupMembers => {
             const updatedMembers = [...prevGroupMembers]; // Create a copy of the array
         
-            // Check if the element at the given index exists and is a string
-              // Check if the last character of the member at the given index is "$"
             if(typeof updatedMembers[index] === 'string' && updatedMembers[index].startsWith('$')){
                 updatedMembers[index] = updatedMembers[index].substring(1);
                 updatedMembers[index] = _contacts[index];
-                console.log("XDXD")
+                // console.log("XDXD")
             }
             else if (typeof updatedMembers[index] === 'string' && updatedMembers[index].endsWith('$')) {
-            // Remove "$" from the member
-            console.log('lmao')
-            updatedMembers[index] = updatedMembers[index].slice(0, -1);
+                // Remove "$" from the member
+                // console.log('lmao')
+                updatedMembers[index] = updatedMembers[index].slice(0, -1);
             } else {
-            // Add a new element at the index
-            console.log('lol')
-            updatedMembers.splice(index, 0, _contacts[index]);
+                // Add a new element at the index
+                // console.log('lol')
+                updatedMembers.splice(index, 0, _contacts[index]);
             }
             
         
-            return updatedMembers; // Return the updated array
+            return updatedMembers;
           });
 
         setDisplay(prev => (
@@ -194,7 +184,7 @@ function ContactsBar(){
         setDisplay(prev => {
             const updatedDisplay = [...prev]; // Create a copy of the array
             updatedDisplay[index] = true; // Update the value at the specified index
-            return updatedDisplay; // Return the updated array
+            return updatedDisplay; 
 
           });
     }
@@ -203,31 +193,37 @@ function ContactsBar(){
         setGroupName(e.target.value);
     }
 
-    function createGroup(){
-        if(groupName){
-            // alert(groupName);
+    function createGroup() {
+        if (groupName) {
             setShowAddGroup(false);
             setDirectOrGroupsDisplay('groups');
-
-            setGroupMembers([]);
-            // setDisplay(prev => prev.map(() => true));
-            setDisplay(prev => (
-                Array(_contacts.length).fill(true)
-              ));
     
-            setGroupMembers(prev => (
-                Array(_contacts.length).fill('$')
-              ));
+            const nonDollarMembers = groupMembers.filter(member => !member.includes('$'));
+
+            _setGroups(prev => {
+                if (prev.length === 0) {
+                    _setGroupNames([groupName]);
+                    console.log("IGHT")
+                    return [nonDollarMembers];
+                } else {
+                    const newGroup = [...prev];
+                    // const lastRowIndex = newGroup.length - 1;
+                    newGroup.push(nonDollarMembers);
+                    _setGroupNames([..._groupNames, groupName]);
+                    return newGroup;
+                }
+            });
+    
+            setGroupMembers([]);
+            setDisplay(Array(_contacts.length).fill(true));
+            setGroupMembers(Array(_contacts.length).fill('$'));
+
         }
     }
 
     // useEffect(()=>{
-    //     console.log(`display : ${display}`);
-    // }, [display])
-
-    // useEffect(()=>{
-    //     console.log(`group members : ${groupMembers}`);
-    // }, [groupMembers])
+    //     console.log(_groupNames);
+    // }, [_groupNames])
 
     return(
         <div className={ChatPageStyles.contacts_bar}>
@@ -244,7 +240,7 @@ function ContactsBar(){
             </div>
 
             <div className={ChatPageStyles.direct_or_group}>
-                <div onClick={displayDirects} className={ChatPageStyles.direct}>Direct</div>
+                <div onClick={displayDirects} className={ChatPageStyles.direct}>Friends</div>
                 <div onClick={displayGroups} className={ChatPageStyles.group}>Groups</div>
             </div>
 
@@ -328,13 +324,16 @@ function ContactsBar(){
             {directsOrGroupsDisplay==='groups' && (
                 <div className={ChatPageStyles.directs}>
                     {/* {console.log({_contacts})} */}
-                    {groupMembers.map((item, index) => (
+                    {_groups.map((item, index) => (
                         <React.Fragment key={index}>
-                        <div name={item}>{item}</div>
+                            {_groupNames[index]}
+                            <div name={item}>{item}</div>
+                            <hr />
                         </React.Fragment>
                     ))}
                 </div>
             )}
+
 
             {activeChat ? (
                 <UltimateSocket

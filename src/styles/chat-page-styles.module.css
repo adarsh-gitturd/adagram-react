@@ -222,7 +222,7 @@ background: var(--v3);
 
 .addnewgroup{
     position: absolute;
-   /* z-index: 4; ////////////////////////////////////////////////////*/
+    z-index: 4; 
     margin-top: 150px;
     margin-left: 700px;
     background-color: var(--v3);
