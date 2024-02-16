@@ -48,6 +48,6 @@ image, video
 A Adarsh Wilson
 - GitHub ↠ [@adarsh-gitturd](https://github.com/adarsh-gitturd)
 - Gmail ↠ adarshwilsona@gmail.com
-- LinkedIn ↠ [adarsh-wilson](www.linkedin.com/in/adarsh-wilson)
+- LinkedIn ↠ [adarsh-wilson](https://www.linkedin.com/in/[adarsh-wilson])
 
 Feel free to contribute to this project by submitting bug reports, feature requests, or pull requests. Any suggestion or feedback for improvement is welcome!
